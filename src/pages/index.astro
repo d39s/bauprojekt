@@ -9,6 +9,11 @@ import HomeRequirements from '../components/home/requirements.astro';
 import HomeReferences from '../components/home/references.astro';
 import HomeCareer from '../components/home/career.astro';
 //const {topBg = "white", topFilter = "", stripeBg = "var(--yellow)", bottomBg = "var(--gray)"} = Astro.props;
+
+import { getImage } from "astro:assets";
+import teaser from "../assets/teaser_home.jpg";
+
+const optimizedTeaser = await getImage({src: teaser, format: 'webp'});
 ---
 
 <!doctype html>
@@ -24,12 +29,11 @@ import HomeCareer from '../components/home/career.astro';
 <body>
     <Header/>
     <main>
-        <div id="teaser" class="teaser" style="background-image: url('/src/assets/teaser_home.jpg')">
+        <div id="teaser" class="teaser" style={`background-image: url(${optimizedTeaser.src});`}>
             <div class="container">
                 <div id="layer">
                     <h1>
-                        Ihr Partner
-                        <span>für gewerblichen Ausbau</span>
+                        Stets das richtige Maß am Bau<span>.</span>
                     </h1>
                 </div>
             </div>

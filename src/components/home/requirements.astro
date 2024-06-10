@@ -1,4 +1,15 @@
 ---
+import blue_summit from '../../assets/Baubuero_Blue-Summit_09.jpg';
+import { getImage } from "astro:assets";
+import buero4 from '../../assets/buero4.jpg';
+import buero5 from '../../assets/buero5.jpg';
+import buero6 from '../../assets/buero6.jpg';
+import buero7 from '../../assets/buero7.jpg';
+
+const optimizedBuero4 = await getImage({src: buero4, format: 'webp'});
+const optimizedBuero5 = await getImage({src: buero5, format: 'webp'});
+const optimizedBuero6 = await getImage({src: buero6, format: 'webp'});
+const optimizedBuero7 = await getImage({src: buero7, format: 'webp'});
 
 ---
 
@@ -13,30 +24,30 @@
                 Ihre Wünsche und Vorstellungen für ein Projekt stehen für uns an erster Stelle.  Unsere Aufgabe ist es sie zu verstehen und umzusetzen.
             </p>
         </div>
-        <img class="round-img" src="https://bp-fmck.de/wp-content/uploads/2020/05/Baubuero_Blue-Summit_09.jpg" width="375" style="background-color: #eee;">
+        <img class="round-img" src={blue_summit.src} width="375" style="background-color: #eee;">
     </div>
     <div class="scope-info">
-        <div class="round-img" style="background: url('/src/assets/buero4.jpg')">
+        <div class="round-img" style={`background-image: url(${optimizedBuero4.src});`}>
             <div>
                 <h3>Beratung</h3>
                 <p>immer im Sinne des Auftraggebers</p>
             </div>
             
         </div>
-        <div class="round-img" style="background: url('/src/assets/buero5.jpg')">
+        <div class="round-img" style={`background-image: url(${optimizedBuero5.src});`}>
             <div>
                 <h3>Qualität</h3>
                 <p>in der Umsetzung der Projekte</p>
             </div>
         </div>
-        <div class="round-img" style="background: url('/src/assets/buero6.jpg')">
+        <div class="round-img" style={`background-image: url(${optimizedBuero6.src});`}>
             <div>
                 <h3>Fertigstellung</h3>
                 <p>fristgerechte ohne Verzug</p>
             </div>
             
         </div>
-        <div class="round-img" style="background: url('/src/assets/buero7.jpg')">
+        <div class="round-img" style={`background-image: url(${optimizedBuero7.src});`}>
             <div>
                 <h3>Kommunikation</h3>
                 <p>auf Augenhöhe mit allen Beteiligten</p>
