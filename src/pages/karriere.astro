@@ -1,44 +1,46 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import Layout from '../layouts/no_teaser.astro';
 import CollapsibleCard from "../components/CollapsibleCard.astro";
 ---
 
 <Layout>
-    <div slot="head">
-        <h1>Arbeiten bei uns</h1>
-        <p>Echt zu empfehlen. text text text text text text text text text text text text text text text text text text
-            text text text text text text text text text text text text text text
-            text text text text text text text text text text text text text text text text text text text text text</p>
+    <div class="card-section dark">
+        <div class="container" slot="head">
+            <h1>Arbeiten bei uns</h1>
+            <p>Echt zu empfehlen. text text text text text text text text text text text text text text text text text text
+                text text text text text text text text text text text text text text
+                text text text text text text text text text text text text text text text text text text text text text</p>
+        </div>
+
     </div>
-    <div id="positions">
-        <h2>Stellenausschreibungen</h2>
-        <CollapsibleCard title="neuer web entwickler">
-            <p>css pseudo elemente machen mich traurig, ich mag nicht mehr.</p>
-            <p>aber guck, ausklappbare karten, wenigstens was</p>
-        </CollapsibleCard>
-        <CollapsibleCard title="colin ersatz">
-            <p>arbeitszeit ca. 20h/woche, aber nur 1x im monat</p>
-            <p>120 tage urlaub, plus freitags und jeder zweite montag</p>
-        </CollapsibleCard>
-        <CollapsibleCard title="jemand der die website kaputt macht">
-            <p>war nur spaß, die karte ist robust</p>
-            <ul>
-                <li>guck</li>
-                <li>hier</li>
-                <li>aufzählung</li>
-            </ul>
-        </CollapsibleCard>
+    <div class="card-section light">
+        <div class="container">
+            <h2>Stellenausschreibungen</h2>
+
+            <CollapsibleCard title="Bauleiter (m/w/d)">
+                <p>css pseudo elemente machen mich traurig, ich mag nicht mehr.</p>
+                <p>aber guck, ausklappbare karten, wenigstens was</p>
+            </CollapsibleCard>
+
+            <CollapsibleCard title="Teamassistent (m/w/d)">
+                <p>arbeitszeit ca. 20h/woche, aber nur 1x im monat</p>
+                <p>120 tage urlaub, plus freitags und jeder zweite montag</p>
+            </CollapsibleCard>
+
+            <CollapsibleCard title="Werksstudent Bauleiter (m/w/d)">
+                <p>war nur spaß, die karte ist robust</p>
+                <ul>
+                    <li>guck</li>
+                    <li>hier</li>
+                    <li>aufzählung</li>
+                </ul>
+            </CollapsibleCard>
+        </div>
     </div>
+ 
 </Layout>
 
 <style>
-    #positions {
-        margin: 0 15%;
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
-    }
-
     li {
         list-style-position: inside;
     }

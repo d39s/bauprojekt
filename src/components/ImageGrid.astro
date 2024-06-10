@@ -87,6 +87,10 @@ const headImageUrlStyle = `background-image: url(${headImageUrl});`
 </script>
 
 <style define:vars={{numImages}}>
+    h2{
+        margin: 0;
+        color: #fff;
+    }
     #image-grid {
         display: grid;
         grid-template-rows: 1.5fr 1fr;
@@ -94,6 +98,7 @@ const headImageUrlStyle = `background-image: url(${headImageUrl});`
         aspect-ratio: 5 / 3;
         overflow: hidden;
         gap: 10px;
+        padding: 65px 0 45px;
     }
 
     #head-image {

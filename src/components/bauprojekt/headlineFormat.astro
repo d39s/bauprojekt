@@ -1,0 +1,34 @@
+---
+
+interface Props {
+    sub: string;
+    main: string;
+    color: string;
+}
+
+const {sub, main, color} = Astro.props;
+---
+    <div class="headline-format">
+        <div class="sub-headline">
+            {sub}
+        </div>
+        <h2 class="main-headline">
+            {main}
+        </h2>
+    </div>
+
+
+<style define:vars={{color}}>
+    .headline-format{
+        padding-bottom: 25px;
+        text-align: center;
+    }
+    .sub-headline{
+        color: var(--yellow);
+        font-size: 18px;
+    }
+    .main-headline{
+        font-size: 36px;
+        color: var(--color);
+    }
+</style>

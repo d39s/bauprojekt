@@ -1,5 +1,5 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import Layout from '../layouts/with_teaser.astro';
 import TeamCard from "../components/TeamCard.astro";
 
 ---
@@ -7,37 +7,47 @@ import TeamCard from "../components/TeamCard.astro";
 <Layout topBg="url('https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer_public/55/95/55958815-3a8a-4032-ac7a-ff8c8ec8898a/gettyimages-1067956982.jpg')"
         topFilter="blur(5px) opacity(60%)">
 
-    <div slot="head" id="head">
-        <h1>Unser Team</h1>
-        <div id="intro">
-            <p>
-                Text text text text text text text text text text text text text text text text text text text text text
-                text text text text text text text text text text text text text text text text text text text text
-            </p>
-            <img src="https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer_public/55/95/55958815-3a8a-4032-ac7a-ff8c8ec8898a/gettyimages-1067956982.jpg"/>
+        <div class="card-section light">
+            <div class="container">
+                <h2>Über Uns</h2>
+                <div id="intro">
+                    <div>
+                        <p>
+                            Die Partner Udo Köhler, Dirk Köhler und Gregor Schmidts haben die Bauprojekt GmbH 2019 gemeinsam gegründet. 
+                            Die Brüder Udo- und Dirk Köhler schauen auf eine mehr als 40-jährige Bauerfahrung zurück: Sie sind Eigentümer der beiden familiengeführten Generalunternehmen „Erich Köhler GmbH“ und „FMC planen und bauen AG“.
+                            Mit der Gründung der „Bauprojekt Gmbh“ wurde die Angebotspalette nun vervollständigt, indem
+                            nun auch der gesamte süddeutsche Raum erschlossen wurde – und zwar mit starken Partnern im Rücken. 
+                        </p>
+                        <p>
+                            Wir freuen uns darauf Sie bei zukünftigen Bauprojekten rund um den schlüsselfertigen Mieterausbau unterstützen zu dürfen.
+                        </p>
+                    </div>
+                    <img class="round-img" src="/src/assets/team2.jpg"/>
+                </div>
+            </div>
         </div>
-    </div>
-
-    <div id="card-collection">
-        <h2>Gruppe 1</h2>
-        <div class="cards">
-            <TeamCard name="Dominic" position="Head of Sklaventreiber"
-                      imagePath="/src/assets/team1.jpg"></TeamCard>
-            <TeamCard name="kitty cat" position="chief meower"
-                      imagePath="/src/assets/team2.jpg"></TeamCard>
-            <TeamCard name="kitty cat" position="chief meower"
-                      imagePath="/src/assets/team3.jpg"></TeamCard>
+        <div class="card-section dark">
+            <div class="container">
+                <h2>Unser <span>Team</span></h2>
+                <div class="cards">
+                    <TeamCard name="Dominic" position="Head of Sklaventreiber"
+                              imagePath="/src/assets/team1.jpg"></TeamCard>
+                    <TeamCard name="kitty cat" position="chief meower"
+                              imagePath="/src/assets/team2.jpg"></TeamCard>
+                    <TeamCard name="kitty cat" position="chief meower"
+                              imagePath="/src/assets/team3.jpg"></TeamCard>
+                </div>
+            </div>
         </div>
-        <h2>Gruppe 2</h2>
-
     </div>
 </Layout>
 
 <style>
     #intro {
         display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 40px
+        grid-template-columns: 1fr 300px;
+        gap: 80px;
+        margin-bottom: 90px;
     }
 
     img {
@@ -58,6 +68,7 @@ import TeamCard from "../components/TeamCard.astro";
     .cards {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        gap: 5%;
+        gap: 45px;
+        margin-bottom: 90px;
     }
 </style>

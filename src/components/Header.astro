@@ -1,34 +1,49 @@
 ---
+import '../styles/global.css';
 const currentPath = new URL(Astro.request.url).pathname;
 ---
 <header>
-    <img alt="logo"
-         src="https://www.wfla.com/wp-content/uploads/sites/71/2023/05/GettyImages-1389862392.jpg?w=2560&h=1440&crop=1">
-
-    <a class={currentPath === "/" ? "active" : ""} href="/">Startseite</a>
-    <a class={currentPath === "/referenzen" ? "active" : ""} href="/referenzen">Referenzen</a>
-    <a class={currentPath === "/team" ? "active" : ""} href="/team">Team</a>
-    <a class={currentPath === "/angebot" ? "active" : ""} href="/angebot">Angebot</a>
-    <a class={currentPath === "/karriere" ? "active" : ""} href="/karriere">Karriere</a>
-    <a class={currentPath === "/kontakt" ? "active" : ""} href="/kontakt">Kontakt</a>
-
+    <div class="container nav">
+        <div>
+            <img alt="Bauprojekt GmbHby FMC-Köhler" src="/img/logo.svg" height="70">
+        </div>
+        
+        <div class="nav-links">
+            <a class={currentPath === "/" ? "active" : ""} href="/">Startseite</a>
+            <a class={currentPath === "/referenzen" ? "active" : ""} href="/referenzen">Referenzen</a>
+            <a class={currentPath === "/team" ? "active" : ""} href="/team">Team</a>
+            <a class={currentPath === "/angebot" ? "active" : ""} href="/angebot">Angebot</a>
+            <a class={currentPath === "/karriere" ? "active" : ""} href="/karriere">Karriere</a>
+            <a class={currentPath === "/kontakt" ? "active" : ""} href="/kontakt">Kontakt</a>
+        </div>
+    </div>
 </header>
 
 <style>
     header {
+        position: fixed;
+        top: 0;
         width: 100%;
-        display: flex;
-        flex-wrap: nowrap;
-        overflow: clip;
-        height: 60px;
-        gap: 60px;
-        padding-right: 30px;
-        align-items: center;
+        padding: 10px 0 45px;
+        background: #fff;
+        z-index: 150;
+        mask-image: radial-gradient(ellipse 100% 60px at center bottom, transparent 50%, black 51%);
     }
 
     img {
         margin-right: auto;
         max-height: 100%;
+    }
+    .nav{
+        display: flex;
+        gap: 30px;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .nav-links{
+        display: flex;
+        gap: 50px;
+
     }
 
     a {

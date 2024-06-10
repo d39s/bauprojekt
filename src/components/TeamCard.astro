@@ -15,7 +15,7 @@ if (!images[imagePath]) throw new Error(`"${imagePath}" does not exist in glob: 
 <div id="container">
     <div id="image-container">
         <!--TODO type guard instead of asserting-->
-        <Image src={images[imagePath]!()} alt={name}/>
+        <Image class="round-img" src={images[imagePath]!()} alt={name}/>
     </div>
     <div id="text">
         <span style="font-weight: bold;">{name}</span>
@@ -36,6 +36,7 @@ if (!images[imagePath]) throw new Error(`"${imagePath}" does not exist in glob: 
         position: absolute;
         bottom: 0;
         width: 100%;
+        border-radius: 5px;
     }
 
     img {
@@ -53,8 +54,8 @@ if (!images[imagePath]) throw new Error(`"${imagePath}" does not exist in glob: 
         left: 0;
         width: 100%;
         height: 100%;
-        border-radius: 20px;
         background: linear-gradient(to bottom, transparent 50%, rgba(0, 0, 0, 0.85) 100%);
+        border-radius: 4px;
     }
 
     span {

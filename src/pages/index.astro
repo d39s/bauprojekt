@@ -2,11 +2,17 @@
 
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
-const {topBg = "white", topFilter = "", stripeBg = "var(--yellow)", bottomBg = "var(--gray)"} = Astro.props;
+
+import HomeServices from '../components/home/services.astro';
+import HomePlanning from '../components/home/planning.astro';
+import HomeRequirements from '../components/home/requirements.astro';
+import HomeReferences from '../components/home/references.astro';
+import HomeCareer from '../components/home/career.astro';
+//const {topBg = "white", topFilter = "", stripeBg = "var(--yellow)", bottomBg = "var(--gray)"} = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="de">
 <head>
     <meta charset="UTF-8"/>
     <meta name="description" content="Bauprojekt"/>
@@ -16,128 +22,55 @@ const {topBg = "white", topFilter = "", stripeBg = "var(--yellow)", bottomBg = "
     <title>Bauprojekt</title>
 </head>
 <body>
-<main>
     <Header/>
-    <div id="page-head">
-        <div id="head-bg"></div>
-        <div id="head-slot">
-            <slot name="head"/>
+    <main>
+        <div id="teaser" class="teaser" style="background-image: url('/src/assets/teaser_home.jpg')">
+            <div class="container">
+                <div id="layer">
+                    <h1>
+                        Ihr Partner
+                        <span>für gewerblichen Ausbau</span>
+                    </h1>
+                </div>
+            </div>
         </div>
-    </div>
-    <div id="content">
-        <slot/>
-        <Footer/>
-    </div>
-</main>
+        <div class="card-section light">
+            <HomeServices />
+        </div>
+        <div class="card-section dark">
+            <HomePlanning />
+        </div>
+        <div class="card-section light">
+            <HomeRequirements />
+        </div>
+        <div class="card-section dark">
+            <HomeReferences />
+        </div>
+        <div class="card-section light">
+            <div class="container">
+                <h2>Informieren Sie sich</h2>
+                <button class="cta-btn">Kontakt</button>
+            </div>
+        </div>
+        <div class="card-section dark">
+            <HomeCareer />
+        </div>
+    </main>
+    <Footer/>
 </body>
 </html>
 
-<style is:global>
-    :root {
-        --gray: #323237;
-        --yellow: #FCBB40;
-    }
-
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
-
-    body {
-        font-family: 'Poppins', sans-serif;
-        font-weight: 300;
-        color: #2f2f34;
-    }
-
-    img {
-        border-radius: 20px;
-    }
-
-    h1 {
-        margin-bottom: 40px;
-    }
-
-    h2 {
-        color: white;
-        font-size: 40px;
-    }
-
-    @font-face {
-        font-family: 'Poppins';
-        font-style: normal;
-        font-weight: 300;
-        src: url('/fonts/Poppins-Light.ttf') format('truetype');
-    }
-
-    @font-face {
-        font-family: 'Poppins';
-        font-style: normal;
-        font-weight: 600;
-        src: url('/fonts/Poppins-SemiBold.ttf') format('truetype');
-    }
-</style>
-
-<style define:vars={{topBg, topFilter, stripeBg, bottomBg}}>
-    main {
-        display: flex;
-        flex-direction: column;
-        flex-wrap: nowrap;
-        align-items: center;
-        min-height: 100vh;
-    }
-
-    #page-head {
+<style>
+    #teaser{
         position: relative;
-        width: 100%;
-        padding: 50px 0 100px 0;
+        background-size: cover;
+        
     }
-
-    #head-slot {
-        margin: 0 15%;
-    }
-
-    #head-bg {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: var(--topBg);
-        background-position: center;
-        filter: var(--topFilter);
-        z-index: -100;
-    }
-
-    #content {
-        width: 100%;
-        position: relative;
-        background: linear-gradient(to bottom, transparent 30px, var(--bottomBg) 0);
-        padding-top: 120px;
-        flex-grow: 1;
-    }
-
-    #page-head:after {
-        position: absolute;
-        content: "";
-        border-top-left-radius: 50%;
-        border-top-right-radius: 50%;
-        height: 60px;
-        width: 100%;
-        background: var(--stripeBg);
-        bottom: -30px;
-        z-index: 10;
-    }
-
-    #content:before {
-        position: absolute;
-        content: "";
-        border-top-left-radius: 50%;
-        border-top-right-radius: 50%;
-        height: 60px;
-        width: 100%;
-        background: var(--bottomBg);
-        z-index: 20;
-        top: 0;
+    #layer{
+        display: inline-block;
+        padding: 25px 35px;
+        -webkit-backdrop-filter: blur(3px);
+        backdrop-filter: blur(3px);
+        background-color: rgba(255, 255, 255, 0.3); 
     }
 </style>

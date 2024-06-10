@@ -1,19 +1,116 @@
 ---
 ---
-<footer>
-    <p>bla bla bla footer footer footer bla bla</p>
-    <p>this page is powered by cat stock photos</p>
-    <p>copyright &copy; name goes here</p>
+<footer class="card-section yellow">
+  
+    <div id="main-footer" >
+        <div class="container">
+            <div id="footer-infos">
+                <div id="footer-block">
+                    <div>
+                        <div class="footer-headline">
+                            Adresse
+                        </div>
+                        <div>
+                            Bauprojekt GmbH by FMC-Köhler <br>
+                            Franziska-Bilek-Weg 5 <br>
+                            80339 München
+                        </div>
+                    </div>
+                </div>
+                <div id="footer-block">
+                    <div>
+                        <div class="footer-headline">
+                            Kontakt
+                        </div>
+                        <div>
+                            Tel. 089-92565656 <br>
+                            Fax: 089-92566414 <br>
+                            E-Mail: info@bp-fmck.de
+                        </div>
+                    </div>
+                </div>
+                <div id="footer-block">
+                    <div>
+                        <div class="footer-headline">
+                            Partner
+                        </div>
+                        <div>
+                            <a href="">FMC planen und bauen AG</a> <br>
+                            <a href="">Erich Köhler GmbH</a>    
+                        </div>
+                    </div>
+                </div>
+                <div id="footer-block">
+                    <div>
+                        <div class="footer-headline">
+                            Informationen
+                        </div>
+                        <div>
+                            <a href="">Karriere</a> <br>
+                            <a href="">Impressum</a> <br>   
+                            <a href="">Datenschatzerklärung</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div id="sub-footer">
+        <div class="container">
+            <div>
+                © Bauprojekt GmbH by FMC Köhler
+            </div>
+        </div>
+    </div>
+
 </footer>
 
 <style>
-    footer {
-        width: 100%;
+    footer.card-section{
+        padding: 0;
+    }
+    footer a{
+        color: var(--gray);
+        text-decoration: none;
+    }
+    footer a:hover{
+        text-decoration: underline;
+    }
+
+    /* main footer */
+    #main-footer{
+        padding: 25px 0;
+    }
+    #footer-infos{
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 30px;
+    }
+    .footer-headline{
+        margin-bottom: 5px;
+        font-weight: bold;
+        font-size: 20px;
+    }
+    /* sub footer*/
+    #sub-footer{
+        
+        
+    }
+    #sub-footer > .container{
         display: flex;
-        flex-direction: column;
-        color: white;
+        padding: 25px 0 45px;
+        border-top: 1px solid var(--gray);
+        justify-content: space-between;
+    }
+    .footer-legals{
+        display: flex;
         align-items: center;
-        margin-top: 100px;
-        margin-bottom: 50px;
+        flex-wrap: nowrap;
+    }
+    .footer-legals > a:nth-of-type(n+2){
+        margin-left: 10px;
+        padding-left: 10px;
+        border-left: 1px solid var(--gray);
     }
 </style>
