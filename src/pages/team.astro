@@ -1,6 +1,8 @@
 ---
 import Layout from '../layouts/with_teaser.astro';
 import TeamCard from "../components/TeamCard.astro";
+import team2 from '../assets/team2.jpg';
+import { Image } from 'astro:assets';
 
 ---
 
@@ -22,7 +24,7 @@ import TeamCard from "../components/TeamCard.astro";
                             Wir freuen uns darauf Sie bei zukünftigen Bauprojekten rund um den schlüsselfertigen Mieterausbau unterstützen zu dürfen.
                         </p>
                     </div>
-                    <img class="round-img" src="/src/assets/team2.jpg"/>
+                    <Image class="round-img" src={team2} alt="Bild vom Team"></Image>
                 </div>
             </div>
         </div>
