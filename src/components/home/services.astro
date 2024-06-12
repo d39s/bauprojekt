@@ -43,4 +43,30 @@
         height: 50px;
         filter: invert(24%) sepia(5%) saturate(5%) hue-rotate(359deg) brightness(97%) contrast(87%);
     }
+    @media (min-width: 768px) AND (max-width: 1000px){
+        .service-container{
+            gap: 25px;
+            padding: 10px 0 30px;
+        }
+        .service-item{
+            font-size: 20px;
+        }
+        .service-item > .icon{
+            height: 40px;
+        }
+    }
+
+    @media (max-width: 767px){
+        .service-container{
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+            padding: 10px 0 30px;
+        }
+        .service-item{
+            font-size: 18px;
+        }
+        .service-item > .icon{
+            height: 30px;
+        }
+    }
 </style>

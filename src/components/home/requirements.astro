@@ -91,4 +91,32 @@ const optimizedBuero7 = await getImage({src: buero7, format: 'webp'});
         font-size: 16px;
     }
 
+    @media (min-width: 768px) AND (max-width: 1000px){
+        .scope-grid{
+            grid-template-columns: 1fr 320px;
+            gap: 40px;
+        }
+        .scope-info{
+            margin: 15px 0 35px;
+        }
+        .scope-info > div{
+            height: 180px;
+        }
+    }
+
+    @media (max-width: 767px){
+        .scope-grid{
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0px;
+        }
+        .scope-info{
+            margin: 15px 0 25px;
+        }
+        .scope-info > div{
+            height: 160px;
+            width: 100%;
+        }
+    }
+
 </style>

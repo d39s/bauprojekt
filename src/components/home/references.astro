@@ -42,4 +42,33 @@ import bad from '../../assets/bad.jpg';
     .cta-btn{
         margin-bottom: 90px;
     }
+    @media (min-width: 768px) AND (max-width: 1000px){
+        .image-gallery{
+            margin-bottom: 30px;
+        }
+        img{
+            height: 330px;
+        }
+        .cta-btn{
+            margin-bottom: 35px;
+        }
+    }
+
+    @media (max-width: 767px){
+        .image-gallery{
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+        img{
+            display: block;
+            max-width:330px;
+            max-height:450px;
+            height: auto;
+            margin: 0 auto;
+        }
+        .cta-btn{
+            margin-bottom: 20px;
+        }
+    }
 </style>

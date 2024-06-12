@@ -16,14 +16,14 @@ import buero2 from '../../assets/buero2.jpg';
                 Mit uns planen
             </button>
         </div>
-        <img src={buero2.src} height="500" class="round-img" >
+        <img src={buero2.src} width="350" class="round-img" >
     </div>
 </div>
 
 <style>
     .planning-grid{
         display: grid;
-        grid-template-columns: 0.6fr 0.4fr;
+        grid-template-columns: 1fr 350px;
         gap: 50px;
     }
     .planning-left{
@@ -32,5 +32,30 @@ import buero2 from '../../assets/buero2.jpg';
     }
     .planning-left > button{
         align-self: center;
+    }
+
+    @media (min-width: 768px) AND (max-width: 1000px){
+        .planning-grid{
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 50px;
+        }
+        .planning-grid > img{
+            width: 300px;
+        }
+    }
+
+    @media (max-width: 767px){
+
+        .planning-grid{
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+        }
+        .planning-grid > img{
+            width: 300px;
+            margin-left: auto;
+            margin-right: auto;
+        }
     }
 </style>

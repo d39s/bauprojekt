@@ -24,7 +24,8 @@ interface Props {
 <body>
     <Header/>
     <main>
-        <div id="teaser"></div>
+        <div id="teaser" class="teaser">
+        </div>
         
         <slot/>
             
@@ -34,7 +35,11 @@ interface Props {
 </html>
 
 <style>
-
+    #teaser{
+        position: relative;
+        background-size: cover;
+        background: var(--topBg);
+    }
     #page-head {
         position: relative;
         width: 100%;

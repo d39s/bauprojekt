@@ -5,7 +5,7 @@
     <div id="main-footer" >
         <div class="container">
             <div id="footer-infos">
-                <div id="footer-block">
+                <div class="footer-block">
                     <div>
                         <div class="footer-headline">
                             Adresse
@@ -17,7 +17,7 @@
                         </div>
                     </div>
                 </div>
-                <div id="footer-block">
+                <div class="footer-block">
                     <div>
                         <div class="footer-headline">
                             Kontakt
@@ -29,7 +29,7 @@
                         </div>
                     </div>
                 </div>
-                <div id="footer-block">
+                <div class="footer-block">
                     <div>
                         <div class="footer-headline">
                             Partner
@@ -40,7 +40,7 @@
                         </div>
                     </div>
                 </div>
-                <div id="footer-block">
+                <div class="footer-block">
                     <div>
                         <div class="footer-headline">
                             Informationen
@@ -99,7 +99,8 @@
     }
     #sub-footer > .container{
         display: flex;
-        padding: 25px 0 45px;
+        padding-top: 25px;
+        padding-bottom: 45px;
         border-top: 1px solid var(--gray);
         justify-content: space-between;
     }
@@ -112,5 +113,25 @@
         margin-left: 10px;
         padding-left: 10px;
         border-left: 1px solid var(--gray);
+    }
+
+    @media (min-width: 768px) AND (max-width: 1000px){
+        #footer-infos{
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+        }
+    }
+
+    @media (max-width: 767px){
+        #footer-infos{
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+        }
+        footer-block{
+            font-size: 15px;
+        }
+        .footer-headline{
+            font-size: 18px;
+        }
     }
 </style>

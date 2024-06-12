@@ -11,7 +11,7 @@ import { Image } from 'astro:assets';
 
         <div class="card-section light">
             <div class="container">
-                <h2>Über Uns</h2>
+                <h2>Über Uns<span>.</span></h2>
                 <div id="intro">
                     <div>
                         <p>
@@ -24,13 +24,19 @@ import { Image } from 'astro:assets';
                             Wir freuen uns darauf Sie bei zukünftigen Bauprojekten rund um den schlüsselfertigen Mieterausbau unterstützen zu dürfen.
                         </p>
                     </div>
-                    <Image class="round-img" src={team2} alt="Bild vom Team"></Image>
+                    <Image class="round-img" src={team2} alt="Bild vom Team" width="300"></Image>
                 </div>
             </div>
         </div>
         <div class="card-section dark">
             <div class="container">
-                <h2>Unser <span>Team</span></h2>
+                <h2>Unser <span>Team.</span></h2>
+                <p class="text">
+                    Auf uns können Sie bauen, denn Ihre Ziele setzen wir um!
+                </p>
+                <p class="text">
+                    Ihre Wünsche und Vorstellungen für ein Projekt stehen für uns an erster Stelle. Unsere Aufgabe ist es sie zu verstehen und umzusetzen.
+                </p>
                 <div class="cards">
                     <TeamCard name="Name 1" position="CEO"
                               imagePath="/src/assets/team1.jpg"></TeamCard>
@@ -62,6 +68,12 @@ import { Image } from 'astro:assets';
         margin-top: 50px;
         margin-bottom: 20px;
     }
+    .text{
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 60%;
+    }
 
     #card-collection {
         margin: 0 15%;
@@ -71,6 +83,6 @@ import { Image } from 'astro:assets';
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         gap: 45px;
-        margin-bottom: 90px;
+        margin: 65px 0 90px;
     }
 </style>

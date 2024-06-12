@@ -43,4 +43,30 @@ import team_besprechung from '../../assets/team_besprechung.jpg';
         align-self: center;
         margin-top: 0;
     }
+
+    @media (min-width: 768px) AND (max-width: 1000px){
+        h2{
+            font-size: 25px;
+        }
+        .career-grid{
+            grid-template-columns: 350px 1fr;
+            gap: 40px;
+            padding: 15px 0 35px;
+        }
+    }
+
+    @media (max-width: 767px){
+        h2{
+            font-size: 22px;
+        }
+        .career-grid{
+            grid-template-columns: 1fr;
+            gap: 30px;
+            padding: 15px 0 25px;
+        }
+        .career-grid > img{
+            margin-left: auto;
+            margin-right: auto;
+        }
+    }
 </style>
