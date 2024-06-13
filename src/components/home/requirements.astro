@@ -109,12 +109,17 @@ const optimizedBuero7 = await getImage({src: buero7, format: 'webp'});
             display: grid;
             grid-template-columns: 1fr;
             gap: 0px;
+            margin-bottom: 0;
+        }
+        .scope-grid > img{
+            display: none;
         }
         .scope-info{
+            grid-template-columns: repeat(1, 1fr);
             margin: 15px 0 25px;
         }
         .scope-info > div{
-            height: 160px;
+            height: 120px;
             width: 100%;
         }
     }

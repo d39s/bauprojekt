@@ -275,7 +275,7 @@ li{
     }
     .card-section::before{
         height: 40px;
-        top: -40px;
+        top: -39px;
     }
     .section{
         margin: 40px 0;
@@ -299,7 +299,7 @@ li{
     }
     .card-section::before{
         height: 25px;
-        top: -25px;
+        top: -24px;
     }
     .section{
         margin: 25px 0 35px;

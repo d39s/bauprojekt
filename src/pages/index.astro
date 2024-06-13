@@ -77,10 +77,20 @@ const optimizedTeaser = await getImage({src: teaser, format: 'webp'});
         background-color: rgba(255, 255, 255, 0.3); 
     }
     @media (min-width: 768px) AND (max-width: 1000px){
-
+        .teaser{
+            min-height: 700px;
+        }
+        h1{
+            font-size: 50px;
+        }
     }
 
     @media (max-width: 767px){
-
+        .teaser{
+            min-height: 500px;
+        }
+        h1{
+            font-size: 30px;
+        }
     }
 </style>

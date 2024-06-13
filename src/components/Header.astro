@@ -5,7 +5,7 @@ const currentPath = new URL(Astro.request.url).pathname;
 <header>
     <div class="container nav">
         <div>
-            <img alt="Bauprojekt GmbHby FMC-Köhler" src="/img/logo.svg" height="70">
+            <img alt="Bauprojekt GmbHby FMC-Köhler" src="/img/logo.svg">
         </div>
         
         <div class="nav-links">
@@ -33,6 +33,8 @@ const currentPath = new URL(Astro.request.url).pathname;
     img {
         margin-right: auto;
         max-height: 100%;
+        vertical-align: inherit;
+        height: 70px;
     }
     .nav{
         display: flex;
@@ -54,5 +56,17 @@ const currentPath = new URL(Astro.request.url).pathname;
 
     a.active {
         color: black;
+    }
+    @media (min-width: 768px) AND (max-width: 1000px){
+        header {
+            mask-image: radial-gradient(ellipse 100% 40px at center bottom, transparent 50%, black 52%);
+        }
+    }
+
+    @media (max-width: 767px){
+        header {
+            padding: 10px 0 35px;
+            mask-image: radial-gradient(ellipse 100% 25px at center bottom, transparent 50%, black 54%);
+        }
     }
 </style>
