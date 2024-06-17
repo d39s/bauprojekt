@@ -1,26 +1,76 @@
 ---
 import Layout from '../layouts/no_teaser.astro';
+import team2 from '../assets/team_besprechung.jpg';
+import { Image } from 'astro:assets';
 ---
 
 <!--suppress HtmlFormInputWithoutLabel -->
 <Layout>
-    <form method="post" id="contact-form">
-        <!--TODO required fields-->
-        <h2 class="wide">Schreiben Sie uns!</h2>
-        <input name="firma" placeholder="Firma" class="wide"/>
-        <input name="anrede" placeholder="Anrede*">
-        <input name="titel" placeholder="Titel">
-        <input name="vorname" placeholder="Vorname*">
-        <input name="nachname" placeholder="Nachname*">
-        <input name="email" placeholder="E-Mail*" type="email">
-        <input name="telefon" placeholder="E-Telefon/Mobil">
-        <div class="wide" style="height: 20px"><!--spacer--></div>
-        <input name="betreff" placeholder="Betreff*" class="wide">
-        <textarea name="text" placeholder="Ihre Nachricht*" class="wide"></textarea>
-        <span hidden class="wide success">Vielen Dank für Ihre Nachricht.</span>
-        <span hidden class="wide error">Ein Fehler ist aufgetreten. Bitte versuchen Sie es später erneut.</span>
-        <button type="submit" class="wide">Senden</button>
-    </form>
+    <div class="card-section light">
+        <div class="container">
+            <h1>
+                Kontakt
+            </h1>
+            <div class="contact-grid">
+                <div>
+                    <h2>
+                        Anfragen
+                    </h2>
+                    <p>
+                        Schreiben Sie uns eine E-Mail über den Link oder nutze das nachfolgende Kontaktformular.
+                    </p>
+                    <a href="">
+                        E-Mail schreiben
+                    </a>
+                </div>
+                <div>
+                    <h3>
+                        Adresse
+                    </h3>
+                    <p>
+                        Bauprojekt GmbH by FMC-Köhler
+                    </p>
+                    <p>
+                        Franziska-Bilek-Weg 5
+                    </p>
+                    <p>
+                        80339 München
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-section dark">
+        <div class="container">
+            <h2>
+                Schreiben Sie uns<span>!</span>
+            </h2>
+
+            <div class="form-grid">
+                <form method="post" id="contact-form">
+                    <!--TODO required fields-->
+                    <input name="firma" placeholder="Firma" class="wide"/>
+                    <input name="anrede" placeholder="Anrede*">
+                    <input name="titel" placeholder="Titel">
+                    <input name="vorname" placeholder="Vorname*">
+                    <input name="nachname" placeholder="Nachname*">
+                    <input name="email" placeholder="E-Mail*" type="email">
+                    <input name="telefon" placeholder="E-Telefon/Mobil">
+                    <div class="wide" style="height: 5px"><!--spacer--></div>
+                    <input name="betreff" placeholder="Betreff*" class="wide">
+                    <textarea name="text" placeholder="Ihre Nachricht*" class="wide"></textarea>
+                    <span hidden class="wide success">Vielen Dank für Ihre Nachricht.</span>
+                    <span hidden class="wide error">Ein Fehler ist aufgetreten. Bitte versuchen Sie es später erneut.</span>
+                    <button type="submit" class="wide">Senden</button>
+                </form>
+                <Image class="round-img" src={team2} alt="Bild vom Team" width="500"></Image>
+            </div>
+
+            
+        </div>
+    </div>
+
 </Layout>
 
 <script>
@@ -35,21 +85,32 @@ import Layout from '../layouts/no_teaser.astro';
 </script>
 
 <style>
+    .contact-grid{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 35px;
+        margin-bottom: 60px;
+    }
+    .contact-grid h2,
+    .contact-grid h3 {
+        margin: 0 0 10px;
+        font-size: 30px;
+    }
+    .contact-grid p{
+        margin-bottom: 5px;
+    }
+    .form-grid{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 75px;
+        margin-bottom: 60px;
+        align-items: center;
+    }
     form {
-        background: white;
-        border-radius: 20px;
-        max-width: 500px;
-        margin: auto;
-        padding: 20px;
         display: grid;
         grid-template-columns: repeat(2, 1fr);
-        gap: 10px;
+        gap: 15px;
     }
-
-    h2 {
-        color: var(--gray);
-    }
-
     input, textarea {
         padding: 10px;
         border-radius: 20px;

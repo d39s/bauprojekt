@@ -4,9 +4,9 @@ const currentPath = new URL(Astro.request.url).pathname;
 ---
 <header>
     <div class="container nav">
-        <div>
+        <a href="/">
             <img alt="Bauprojekt GmbHby FMC-Köhler" src="/img/logo.svg">
-        </div>
+        </a>
         
         <div class="nav-links">
             <a class={currentPath === "/" ? "active" : ""} href="/">Startseite</a>
@@ -14,7 +14,7 @@ const currentPath = new URL(Astro.request.url).pathname;
             <a class={currentPath === "/angebot" ? "active" : ""} href="/angebot">Angebot</a>
             <a class={currentPath === "/referenzen" ? "active" : ""} href="/referenzen">Referenzen</a>
             <a class={currentPath === "/karriere" ? "active" : ""} href="/karriere">Karriere</a>
-            <a class={currentPath === "/kontakt" ? "active" : ""} href="/kontakt">Kontakt</a>
+            <a id="contact" class={currentPath === "/kontakt" ? "active" : ""} href="/kontakt">Kontakt</a>
         </div>
     </div>
 </header>
@@ -44,8 +44,8 @@ const currentPath = new URL(Astro.request.url).pathname;
     }
     .nav-links{
         display: flex;
-        gap: 50px;
-
+        gap: 30px;
+        align-items: center;
     }
 
     a {
@@ -56,6 +56,11 @@ const currentPath = new URL(Astro.request.url).pathname;
 
     a.active {
         color: black;
+    }
+    #contact{
+        padding: 10px 25px;
+        background-color: var(--yellow);
+        border-radius: 10px;
     }
     @media (min-width: 768px) AND (max-width: 1000px){
         header {

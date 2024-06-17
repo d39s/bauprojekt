@@ -1,7 +1,7 @@
 ---
 import Layout from '../layouts/with_teaser.astro';
 import TeamCard from "../components/TeamCard.astro";
-import team2 from '../assets/team2.jpg';
+import team2 from '../assets/team_besprechung3.jpg';
 import { Image } from 'astro:assets';
 
 ---
@@ -23,7 +23,7 @@ import { Image } from 'astro:assets';
                             Wir freuen uns darauf Sie bei zukünftigen Bauprojekten rund um den schlüsselfertigen Mieterausbau unterstützen zu dürfen.
                         </p>
                     </div>
-                    <Image class="round-img" src={team2} alt="Bild vom Team" width="300"></Image>
+                    <Image class="round-img" src={team2} alt="Bild vom Team" width="450"></Image>
                 </div>
             </div>
         </div>
@@ -52,7 +52,7 @@ import { Image } from 'astro:assets';
 <style>
     #intro {
         display: grid;
-        grid-template-columns: 1fr 300px;
+        grid-template-columns: 1fr 450px;
         gap: 80px;
         margin-bottom: 90px;
     }
