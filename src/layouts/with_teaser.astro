@@ -14,7 +14,6 @@ interface Props {
 const {topBg} = Astro.props;
 const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/teaser/*.{jpeg,jpg,png,gif}')
 
-
 const teaser = images[topBg];
 if (!teaser) throw new Error(`"${topBg}" does not exist in glob: "src/assets/*.{jpeg,jpg,png,gif}"`);
 
@@ -29,7 +28,7 @@ const optimizedTeaser = await getImage({src: teaser(), format: 'webp'});
     <meta charset="UTF-8"/>
     <meta name="description" content="Bauprojekt"/>
     <meta name="viewport" content="width=device-width"/>
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+    <link rel="icon" type="image/svg+xml" href="/favicon.png"/>
     <meta name="generator" content={Astro.generator}/>
     <title>Bauprojekt</title>
 </head>
