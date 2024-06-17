@@ -1,15 +1,16 @@
 ---
-import blue_summit from '../../assets/Baubuero_Blue-Summit_09.jpg';
 import { getImage } from "astro:assets";
-import buero4 from '../../assets/buero4.jpg';
-import buero5 from '../../assets/buero5.jpg';
-import buero6 from '../../assets/buero6.jpg';
-import buero7 from '../../assets/buero7.jpg';
+import requirements1 from '../../assets/requirements1.jpg';
+import requirements2 from '../../assets/requirements2.jpg';
+import requirements3 from '../../assets/requirements3.jpg';
+import requirements4 from '../../assets/requirements4.jpg';
+import requirements5 from '../../assets/requirements5.jpg';
 
-const optimizedBuero4 = await getImage({src: buero4, format: 'webp'});
-const optimizedBuero5 = await getImage({src: buero5, format: 'webp'});
-const optimizedBuero6 = await getImage({src: buero6, format: 'webp'});
-const optimizedBuero7 = await getImage({src: buero7, format: 'webp'});
+/* 16:9 */
+const optimizedBuero4 = await getImage({src: requirements1, format: 'webp'});
+const optimizedBuero5 = await getImage({src: requirements2, format: 'webp'});
+const optimizedBuero6 = await getImage({src: requirements3, format: 'webp'});
+const optimizedBuero7 = await getImage({src: requirements4, format: 'webp'});
 
 ---
 
@@ -24,7 +25,7 @@ const optimizedBuero7 = await getImage({src: buero7, format: 'webp'});
                 Ihre Wünsche und Vorstellungen für ein Projekt stehen für uns an erster Stelle.  Unsere Aufgabe ist es sie zu verstehen und umzusetzen.
             </p>
         </div>
-        <img class="round-img" src={blue_summit.src} width="375" style="background-color: #eee;">
+        <img class="round-img" src={requirements5.src} width="375">
     </div>
     <div class="scope-info">
         <div class="round-img" style={`background-image: url(${optimizedBuero4.src});`}>
