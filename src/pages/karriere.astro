@@ -347,17 +347,27 @@ import CollapsibleCard from "../components/CollapsibleCard.astro";
 
     <div class="card-section light">
         <div class="container">
-            <h2>
-                Bewirb dich jetzt<span>.</span>
-            <h2>
             <div class="form">
                 <form method="post" id="contact-form">
                     <!--TODO required fields-->
+                    <h2>Bewirb dich jetzt<span>.</span></h2>
                     <input name="name" placeholder="Name*">
                     <input name="email" placeholder="E-Mail*" type="email">
                     <input name="telefon" placeholder="E-Telefon/Mobil">
-                    <button>Lebenslauf hochladen</button>
-                    <div class="wide" style="height: 20px"><!--spacer--></div>
+
+                    <!-- DragDropField -->
+                    <div id="drag-drop-field">
+                        <div class="box__input">
+                            <svg class="box__icon" xmlns="http://www.w3.org/2000/svg" width="50" height="43" viewBox="0 0 50 43"><path d="M48.4 26.5c-.9 0-1.7.7-1.7 1.7v11.6h-43.3v-11.6c0-.9-.7-1.7-1.7-1.7s-1.7.7-1.7 1.7v13.2c0 .9.7 1.7 1.7 1.7h46.7c.9 0 1.7-.7 1.7-1.7v-13.2c0-1-.7-1.7-1.7-1.7zm-24.5 6.1c.3.3.8.5 1.2.5.4 0 .9-.2 1.2-.5l10-11.6c.7-.7.7-1.7 0-2.4s-1.7-.7-2.4 0l-7.1 8.3v-25.3c0-.9-.7-1.7-1.7-1.7s-1.7.7-1.7 1.7v25.3l-7.1-8.3c-.7-.7-1.7-.7-2.4 0s-.7 1.7 0 2.4l10 11.6z"></path></svg>
+                            <input class="box__file" type="file" name="files[]" id="file" data-multiple-caption="{count} files selected" multiple />
+                            <label for="file">
+                                <strong>Datei auswählen</strong><span class="box__dragndrop"> oder hier herein ziehen</span>.
+                            </label>
+                            <button class="box__button" type="submit">Hochladen</button>
+                        </div>
+                    </div>
+                    <!-- /DragDropField -->
+
                     <span hidden class="wide success">Vielen Dank für Ihre Nachricht.</span>
                     <span hidden class="wide error">Ein Fehler ist aufgetreten. Bitte versuchen Sie es später erneut.</span>
                     <button type="submit" class="wide">Senden</button>
@@ -413,22 +423,72 @@ import CollapsibleCard from "../components/CollapsibleCard.astro";
     form {
         background: white;
         border-radius: 20px;
-        margin: auto;
-        padding: 20px;
+        max-width: 700px;
+        margin: 35px auto 90px;
+        padding: 35px;
         display: grid;
         grid-template-columns: repeat(1, 1fr);
-        gap: 10px;
+        gap: 15px;
+        border: 2px solid var(--gray);
     }
- 
+    form h2{
+        font-size: 50px;
+        margin: 5px 0 25px;
+    }
     input, textarea {
-        padding: 10px;
+        padding: 14px 20px;
         border-radius: 20px;
         border: none;
         outline: none;
-        background: linear-gradient(to bottom, #ddd 0%, #eee 25%, #fff 100%);
+        background: #eee;
         resize: none;
     }
-
+    #drag-drop-field{
+        font-size: 18px;
+        background-color: var(--gray);
+        position: relative;
+        padding: 50px 20px;
+        color: #fff;
+        outline: 2px dashed var(--yellow);
+        outline-offset: -10px;
+        -webkit-transition: outline-offset .15s ease-in-out, background-color .15s linear;
+        transition: outline-offset .15s ease-in-out, background-color .15s linear;
+    }
+    #drag-drop-field .box__button{
+        font-weight: 700;
+        color: #e5edf1;
+        background-color: #39bfd3;
+        display: none;
+        padding: 8px 16px;
+        margin: 40px auto 0;
+    }
+    #drag-drop-field .box__file{
+        width: 0.1px;
+        height: 0.1px;
+        opacity: 0;
+        overflow: hidden;
+        position: absolute;
+        z-index: -1;
+    }
+    #drag-drop-field .box__dragndrop{
+        font-weight: 300;
+    }
+    #drag-drop-field .box__file + label{
+        width: 100%;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        cursor: pointer;
+        display: block;
+        text-align: center;
+        overflow: hidden;
+    }
+    #drag-drop-field .box__icon{
+        width: 100%;
+        height: 60px;
+        fill: var(--yellow);
+        display: block;
+        margin-bottom: 30px;
+    }
     .wide {
         grid-column: 1 / -1;
     }
