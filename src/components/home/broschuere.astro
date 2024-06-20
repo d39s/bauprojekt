@@ -1,0 +1,48 @@
+---
+/* 4:5 */
+import broschuere from '../../assets/broschuere_rueckseite.jpg';
+
+---
+
+<div class="container">
+    <h2>Unsere Broschüre<span>.</span></h2>
+    <div class="broschuere-grid">
+        <img class="round-img" src={broschuere.src} width="500" alt="Aktuelle Broschüre">
+        <div>
+            <p>
+                Erfahren Sie alles über unsere erstklassigen Dienstleistungen, die Referenzen unserer zufriedenen Kunden und unsere vertrauenswürdigen Partner. 
+                Lassen Sie sich von unseren abgeschlossenen Projekten inspirieren. Wir beaten Sie gern.
+            </p>
+            <p>
+                Klicken Sie auf den untenstehenden Link, um die Broschüre herunterzuladen und alle wichtigen Informationen auf einen Blick zu erhalten.
+            </p>
+            <button class="cta-btn">Broschüre anzeigen</button>
+        </div>
+    </div>
+    
+</div>
+
+
+<style>
+    .broschuere-grid{
+        display: grid;
+        grid-template-columns: 500px 1fr;
+        gap: 50px;
+        margin-bottom: 80px;
+    }
+    .broschuere-grid > div{
+        display: grid;
+        grid-template-rows: auto 1fr;
+    }
+    .broschuere-grid .cta-btn{
+        align-self: center;
+    }
+
+    @media (min-width: 768px) AND (max-width: 1000px){
+
+    }
+
+    @media (max-width: 767px){
+
+    }
+</style>

@@ -5,11 +5,17 @@ import CollapsibleCard from "../components/CollapsibleCard.astro";
 
 <Layout>
     <div class="card-section dark">
-        <div class="container" slot="head">
-            <h1>Arbeiten bei uns<span>.</span></h1>
-            <p>Echt zu empfehlen. text text text text text text text text text text text text text text text text text text
-                text text text text text text text text text text text text text text
-                text text text text text text text text text text text text text text text text text text text text text</p>
+        <div class="container" id="head" slot="head">
+            <h1>Arbeiten Sie bei uns<span>.</span></h1>
+            <p>
+                Werde zu einem geschätzten Teil unseres familiären Teams, welches diverse Projekte, von der Idee bis zu der Fertigstellung, betreut. 
+                Neben den vielseitigen Tätigkeitsbereichen, wie kreatives designen, Projektmanagement und Betreuung von Kunden- sowie Handwerksfirmen, steht auch deine persönliche Weiterentwicklung im Mittelpunkt. 
+                Weiterhin profitieren Sie von zahlreichen betrieblichen Angeboten, damit Sie sich bei uns bestens wohlfühlen und Ihre Fähigkeiten erweitern können.
+            </p>
+            <p>
+                Wachsen Sie, zusammen mit Ihren Projekten, über sich hinaus!
+                Bewirben Sie sich auf unsere offenen Stellen oder schicken Sie uns Ihre Initiativbewerbung.
+            </p>
         </div>
 
     </div>
@@ -347,7 +353,6 @@ import CollapsibleCard from "../components/CollapsibleCard.astro";
             <div class="form">
                 <form method="post" id="contact-form">
                     <!--TODO required fields-->
-                    <h2 class="wide">Schreibe uns!</h2>
                     <input name="name" placeholder="Name*">
                     <input name="email" placeholder="E-Mail*" type="email">
                     <input name="telefon" placeholder="E-Telefon/Mobil">
@@ -364,6 +369,13 @@ import CollapsibleCard from "../components/CollapsibleCard.astro";
 </Layout>
 
 <style>
+    h1{
+        font-size: 72px;
+        margin-bottom: 20px;
+    }
+    #head{
+        margin-bottom: 60px;
+    }
     h3{
         margin: 25px 0 12px;
     }
@@ -407,11 +419,7 @@ import CollapsibleCard from "../components/CollapsibleCard.astro";
         grid-template-columns: repeat(1, 1fr);
         gap: 10px;
     }
-
-    h2 {
-        color: var(--gray);
-    }
-
+ 
     input, textarea {
         padding: 10px;
         border-radius: 20px;
