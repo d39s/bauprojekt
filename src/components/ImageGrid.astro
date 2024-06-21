@@ -1,16 +1,22 @@
 ---
 interface Props {
-    bubbles: {
-        text: string;
-        icon?: string;
-    }[];
-    headImageUrl: string;
-    extraImageUrls: string[];
+    data: {
+        location: string;
+        purpose: string;
+        time: string;
+        area: string;
+    }
+    titleImages: (() => Promise<any>)[];
+    allImages: (() => Promise<any>)[];
 }
-
-const {bubbles, headImageUrl, extraImageUrls} = Astro.props;
-const numImages = extraImageUrls.length;
-const headImageUrlStyle = `background-image: url(${headImageUrl});`
+// @ts-expect-error unused variable my ass
+const {data, titleImages, allImages} = Astro.props;
+const numImages = titleImages.length - 1;
+const headerImage = titleImages[0];
+if (!headerImage) throw new Error("");
+const headImageUrlStyle = `background-image: url(${(await headerImage()).default.src});`
+const bubbles: { text: string, icon: string }[] = [];
+console.log(await Promise.all(titleImages.map(i => i())))
 ---
 
 <div id="image-grid">
@@ -25,7 +31,7 @@ const headImageUrlStyle = `background-image: url(${headImageUrl});`
         </div>
     </div>
     {
-        extraImageUrls.map(url => `background-image: url(${url});`).map(style =>
+        (await Promise.all(titleImages.slice(1).map(getter => getter()))).map(data => `background-image: url(${data.default.src});`).map(style =>
                 <div style={style}></div>)
     }
 </div>

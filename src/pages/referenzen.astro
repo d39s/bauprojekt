@@ -1,43 +1,42 @@
 ---
 import Layout from '../layouts/no_teaser.astro';
 import ImageGrid from "../components/ImageGrid.astro";
+
+const allFiles = import.meta.glob("../assets/referenzen/**/*");
+const refs = new Map<string, any>;
+for (const [path, getter] of Object.entries(allFiles)) {
+    const refMatch = /^.*\/(.*?)\/[^/]*$/.exec(path);
+    if (!refMatch || !refMatch[1]) throw new Error("error extracting reference name")
+    const refName = refMatch[1];
+    if (!refs.has(refName))
+        refs.set(refName, {
+            data: undefined,
+            titleImages: [],
+            allImages: [],
+        })
+    const inst = refs.get(refName);
+    if (path.endsWith(".json"))
+        inst.data = await getter()
+    else {
+        inst.allImages.push(getter);
+        if (/titel.[a-zA-Z]+$/.exec(path))
+            inst.titleImages.push(getter)
+    }
+}
+const cards = Array.from(refs.values())
 ---
 
 <Layout>
     <div class="card-section dark " id="gallery">
-        <div class="container">
-            <ImageGrid
-                headImageUrl="https://cdn.chicken69.dev/stuff/QUADRUM-Malerwinkel-02-016-HDR.jpg.jpg"
-                extraImageUrls={[
-                    "https://cdn.chicken69.dev/stuff/QUADRUM-Malerwinkel-02-122.jpg.jpg",
-                    "https://cdn.chicken69.dev/stuff/QUADRUM-Malerwinkel-02-043.jpg.jpg.jpg",
-                    "https://cdn.chicken69.dev/stuff/QUADRUM-Malerwinkel-02-076-HDR.jpg.jpg"
-                ]}
-                bubbles={[
-                    {text: "8 Wochen", icon: "/icons/clock-regular.svg"},
-                    {text: "München", icon: "/icons/hashtag-solid.svg"},
-                    {text: "75m²"}
-                ]}
-            >
-            </ImageGrid>
-        </div>
-        <div class="container">
-            <ImageGrid
-                    headImageUrl="https://cdn.chicken69.dev/stuff/Bprojekt-anwalt-0523_storz-12.jpg"
-                    extraImageUrls={[
-                        "https://cdn.chicken69.dev/stuff/Bprojekt-anwalt-0523_storz-7.jpg",
-                        "https://cdn.chicken69.dev/stuff/Bprojekt-anwalt-0523_storz-26.jpg",
-                        "https://cdn.chicken69.dev/stuff/Bprojekt-anwalt-0523_storz-6.jpg",
-                        "https://cdn.chicken69.dev/stuff/Bprojekt-anwalt-0523_storz-31.jpg"
-                    ]}
-                    bubbles={[
-                        {text: "3,5 Monate", icon: "/icons/clock-regular.svg"},
-                        {text: "Theresienhöhe", icon: "/icons/hashtag-solid.svg"},
-                        {text: "430m²"}
-                    ]}
-            >
-            </ImageGrid>
-        </div>
+        {cards.map(data =>
+                <div class="container">
+                    <ImageGrid
+                            titleImages={data.titleImages}
+                            allImages={data.allImages}
+                            data={data.data}
+                    />
+                </div>
+        )}
     </div>
 </Layout>
 
