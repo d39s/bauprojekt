@@ -1,4 +1,6 @@
 ---
+import {Icon} from 'astro-icon/components'
+
 interface Props {
     data: {
         location: string;
@@ -9,13 +11,29 @@ interface Props {
     titleImages: number[];
     allImages: (() => Promise<any>)[];
 }
-// @ts-expect-error unused variable my ass
 const {data, titleImages, allImages} = Astro.props;
 const numPreviewImages = titleImages.length - 1;
 const headerImage = allImages.filter((_, idx) => titleImages.includes(idx))[0];
 if (!headerImage) throw new Error("");
 const headImageUrlStyle = `background-image: url(${(await headerImage()).default.src});`
-const bubbles: { text: string, icon: string }[] = [];
+const bubbles = [
+    {
+        text: data.purpose,
+        icon: "mdi:hashtag",
+    },
+    {
+        text: data.location,
+        icon: "mdi:location",
+    },
+    {
+        text: data.area,
+        icon: "mdi:surface-area",
+    },
+    {
+        text: data.time,
+        icon: "mdi:access-time",
+    },
+]
 ---
 
 <div id="image-grid">
@@ -23,7 +41,8 @@ const bubbles: { text: string, icon: string }[] = [];
         <div id="overlay">
             <div id="bubbles">
                 {bubbles.map(({text, icon}) => <span class="bubble">
-                    {icon === undefined ? "" : <img src={icon} alt="icon">}
+                    {icon === undefined ? "" :
+                            <Icon name={icon}/>}
                     {text}
                 </span>)}
             </div>
