@@ -71,18 +71,33 @@ const headImageUrlStyle = `background-image: url(${headImageUrl});`
         const myOverlay = grid.nextElementSibling;
         if (!isDiv(myOverlay)) throw Error("implementation error: overlay is not a div");
         let currentIndex = 0;
+        const keyListener = (event: KeyboardEvent) => {
+            if (event.key === "Escape") getButton(myOverlay, "#close").click();
+            if (event.key === "ArrowLeft") getButton(myOverlay, "#prev").click();
+            if (event.key === "ArrowRight") getButton(myOverlay, "#next").click();
+            };
         imageDivs.forEach((div, index) => {
             div.addEventListener("click", () => {
                 currentIndex = index;
                 setImage(myOverlay, imageDivs, currentIndex);
+                // not using capture=once since the user may not ever press a key
+                // (i.e. close button instead of escape key)
+                document.addEventListener("keydown", keyListener);
             })
         });
         getButton(myOverlay, "#close").addEventListener("click", () => {
             myOverlay.style.visibility = "hidden";
             myOverlay.style.opacity = "0";
+            document.removeEventListener("keydown", keyListener);
         });
-        getButton(myOverlay, "#prev").addEventListener("click", () => setImage(myOverlay, imageDivs, --currentIndex));
-        getButton(myOverlay, "#next").addEventListener("click", () => setImage(myOverlay, imageDivs, ++currentIndex));
+        getButton(myOverlay, "#prev").addEventListener("click", () => {
+            currentIndex = Math.max(0, currentIndex - 1);
+            setImage(myOverlay, imageDivs, currentIndex)
+            });
+        getButton(myOverlay, "#next").addEventListener("click", () => {
+            currentIndex = Math.min(imageDivs.length - 1, currentIndex + 1)
+            setImage(myOverlay, imageDivs, currentIndex)
+            });
     })
 </script>
 
