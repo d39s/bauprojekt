@@ -4,6 +4,7 @@ import ImageGrid from "../components/ImageGrid.astro";
 
 const allFiles = import.meta.glob("../assets/referenzen/**/*");
 const refs = new Map<string, any>;
+let iter = 0;
 for (const [path, getter] of Object.entries(allFiles)) {
     const refMatch = /^.*\/(.*?)\/[^/]*$/.exec(path);
     if (!refMatch || !refMatch[1]) throw new Error("error extracting reference name")
@@ -20,7 +21,8 @@ for (const [path, getter] of Object.entries(allFiles)) {
     else {
         inst.allImages.push(getter);
         if (/titel.[a-zA-Z]+$/.exec(path))
-            inst.titleImages.push(getter)
+            inst.titleImages.push(iter)
+        iter++;
     }
 }
 const cards = Array.from(refs.values())

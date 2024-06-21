@@ -6,17 +6,16 @@ interface Props {
         time: string;
         area: string;
     }
-    titleImages: (() => Promise<any>)[];
+    titleImages: number[];
     allImages: (() => Promise<any>)[];
 }
 // @ts-expect-error unused variable my ass
 const {data, titleImages, allImages} = Astro.props;
-const numImages = titleImages.length - 1;
-const headerImage = titleImages[0];
+const numPreviewImages = titleImages.length - 1;
+const headerImage = allImages.filter((_, idx) => titleImages.includes(idx))[0];
 if (!headerImage) throw new Error("");
 const headImageUrlStyle = `background-image: url(${(await headerImage()).default.src});`
 const bubbles: { text: string, icon: string }[] = [];
-console.log(await Promise.all(titleImages.map(i => i())))
 ---
 
 <div id="image-grid">
@@ -31,8 +30,15 @@ console.log(await Promise.all(titleImages.map(i => i())))
         </div>
     </div>
     {
-        (await Promise.all(titleImages.slice(1).map(getter => getter()))).map(data => `background-image: url(${data.default.src});`).map(style =>
-                <div style={style}></div>)
+        (await Promise.all(
+            allImages.slice(1).map(getter => getter())
+        )).map(
+            (data, idx) => ({
+                style: `background-image: url(${data.default.src}); ${titleImages.includes(idx + 1) ? "" : "display: none;"}`,
+                idx: idx + 1
+            })).map(({style, idx}) =>
+                <div style={style} data-idx={idx}></div>
+        )
     }
 </div>
 <div id="image-grid-overlay">
@@ -80,7 +86,9 @@ console.log(await Promise.all(titleImages.map(i => i())))
             };
         imageDivs.forEach((div, index) => {
             div.addEventListener("click", () => {
-                currentIndex = index;
+                const idxAttr = index ? div.getAttribute("data-idx") : "0";
+                if (!idxAttr) throw new Error("failed to get data-idx");
+                currentIndex = Number.parseInt(idxAttr);
                 setImage(myOverlay, imageDivs, currentIndex);
                 // not using capture=once since the user may not ever press a key
                 // (i.e. close button instead of escape key)
@@ -103,11 +111,11 @@ console.log(await Promise.all(titleImages.map(i => i())))
     })
 </script>
 
-<style define:vars={{numImages}}>
+<style define:vars={{numPreviewImages}}>
     #image-grid {
         display: grid;
         grid-template-rows: 1.5fr 1fr;
-        grid-template-columns: repeat(var(--numImages), 1fr);
+        grid-template-columns: repeat(var(--numPreviewImages), 1fr);
         aspect-ratio: 5 / 3;
         overflow: hidden;
         gap: 10px;
