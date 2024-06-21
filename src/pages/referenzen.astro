@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/no_teaser.astro';
 import ImageGrid from "../components/ImageGrid.astro";
+import {Icon} from 'astro-icon/components';
 
 const allFiles = import.meta.glob("../assets/referenzen/**/*");
 const refs = new Map<string, any>;
@@ -29,9 +30,19 @@ const cards = Array.from(refs.values())
 ---
 
 <Layout>
-    <div class="card-section dark " id="gallery">
+    <div class="card-section dark" id="gallery">
+        <div class="container">
+            <span class="reference-toggle" data-purpose="Wohnung">
+                <Icon name="mdi:hashtag"/>
+                Wohnung
+            </span>
+            <span class="reference-toggle" data-purpose="xyz">
+                <Icon name="mdi:hashtag"/>
+                Blabla
+            </span>
+        </div>
         {cards.map(data =>
-                <div class="container">
+                <div class="container" data-purpose={data.data.purpose}>
                     <ImageGrid
                             titleImages={data.titleImages}
                             allImages={data.allImages}
@@ -42,10 +53,38 @@ const cards = Array.from(refs.values())
     </div>
 </Layout>
 
+<script>
+    document.querySelectorAll("#gallery > .container > .reference-toggle").forEach(element =>
+        element.addEventListener("click", () => {
+            element.toggleAttribute("deselected");
+            const purpose = element.getAttribute("data-purpose");
+            if (!purpose) return;
+            [...document.querySelectorAll("#gallery > .container")].filter(
+                container => container.getAttribute("data-purpose") === purpose
+            ).forEach(container => container.toggleAttribute("hidden"));
+        })
+    );
+</script>
+
 <style>
+    .reference-toggle {
+        background-color: white;
+        border-radius: 50px;
+        padding: 5px 15px;
+        margin: 0 5px;
+        color: black;
+        cursor: pointer;
+        user-select: none;
+        transition: filter 0.1s ease-out;
+    }
+
+    .reference-toggle[deselected] {
+        filter: brightness(0.5);
+    }
+
     #gallery {
         display: flex;
         flex-direction: column;
-        padding: 30px 0;
+        padding: 60px 0;
     }
 </style>
