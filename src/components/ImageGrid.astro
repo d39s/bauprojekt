@@ -1,36 +1,63 @@
 ---
-interface Props {
-    title: string;
-    byline: string;
-    bubbles: {
-        text: string;
-        icon?: string;
-    }[];
-    headImageUrl: string;
-    extraImageUrls: string[];
-}
+import {Icon} from 'astro-icon/components'
 
-const {title, byline, bubbles, headImageUrl, extraImageUrls} = Astro.props;
-const numImages = extraImageUrls.length;
-const headImageUrlStyle = `background-image: url(${headImageUrl});`
+interface Props {
+    data: {
+        location: string;
+        purpose: string;
+        time: string;
+        area: string;
+    }
+    titleImages: number[];
+    allImages: (() => Promise<any>)[];
+}
+const {data, titleImages, allImages} = Astro.props;
+const numPreviewImages = titleImages.length - 1;
+const headerImage = allImages.filter((_, idx) => titleImages.includes(idx))[0];
+if (!headerImage) throw new Error("");
+const headImageUrlStyle = `background-image: url(${(await headerImage()).default.src});`
+const bubbles = [
+    {
+        text: data.purpose,
+        icon: "mdi:hashtag",
+    },
+    {
+        text: data.location,
+        icon: "mdi:location",
+    },
+    {
+        text: data.area,
+        icon: "mdi:surface-area",
+    },
+    {
+        text: data.time,
+        icon: "mdi:access-time",
+    },
+]
 ---
 
 <div id="image-grid">
     <div id="head-image" style={headImageUrlStyle}>
         <div id="overlay">
-            <h2>{title}</h2>
-            <span id="byline">{byline}</span>
             <div id="bubbles">
                 {bubbles.map(({text, icon}) => <span class="bubble">
-                    {icon === undefined ? "" : <img src={icon} alt="icon">}
+                    {icon === undefined ? "" :
+                            <Icon name={icon}/>}
                     {text}
                 </span>)}
             </div>
         </div>
     </div>
     {
-        extraImageUrls.map(url => `background-image: url(${url});`).map(style =>
-                <div style={style}></div>)
+        (await Promise.all(
+            allImages.slice(1).map(getter => getter())
+        )).map(
+            (data, idx) => ({
+                style: `background-image: url(${data.default.src}); ${titleImages.includes(idx + 1) ? "" : "display: none;"}`,
+                idx: idx + 1
+            })).map(({style, idx}) =>
+                <div style={style} data-idx={idx}></div>
+        )
     }
 </div>
 <div id="image-grid-overlay">
@@ -71,30 +98,43 @@ const headImageUrlStyle = `background-image: url(${headImageUrl});`
         const myOverlay = grid.nextElementSibling;
         if (!isDiv(myOverlay)) throw Error("implementation error: overlay is not a div");
         let currentIndex = 0;
+        const keyListener = (event: KeyboardEvent) => {
+            if (event.key === "Escape") getButton(myOverlay, "#close").click();
+            if (event.key === "ArrowLeft") getButton(myOverlay, "#prev").click();
+            if (event.key === "ArrowRight") getButton(myOverlay, "#next").click();
+            };
         imageDivs.forEach((div, index) => {
             div.addEventListener("click", () => {
-                currentIndex = index;
+                const idxAttr = index ? div.getAttribute("data-idx") : "0";
+                if (!idxAttr) throw new Error("failed to get data-idx");
+                currentIndex = Number.parseInt(idxAttr);
                 setImage(myOverlay, imageDivs, currentIndex);
+                // not using capture=once since the user may not ever press a key
+                // (i.e. close button instead of escape key)
+                document.addEventListener("keydown", keyListener);
             })
         });
         getButton(myOverlay, "#close").addEventListener("click", () => {
             myOverlay.style.visibility = "hidden";
             myOverlay.style.opacity = "0";
+            document.removeEventListener("keydown", keyListener);
         });
-        getButton(myOverlay, "#prev").addEventListener("click", () => setImage(myOverlay, imageDivs, --currentIndex));
-        getButton(myOverlay, "#next").addEventListener("click", () => setImage(myOverlay, imageDivs, ++currentIndex));
+        getButton(myOverlay, "#prev").addEventListener("click", () => {
+            currentIndex = Math.max(0, currentIndex - 1);
+            setImage(myOverlay, imageDivs, currentIndex);
+            });
+        getButton(myOverlay, "#next").addEventListener("click", () => {
+            currentIndex = Math.min(imageDivs.length - 1, currentIndex + 1);
+            setImage(myOverlay, imageDivs, currentIndex);
+            });
     })
 </script>
 
-<style define:vars={{numImages}}>
-    h2{
-        margin: 0;
-        color: #fff;
-    }
+<style define:vars={{numPreviewImages}}>
     #image-grid {
         display: grid;
         grid-template-rows: 1.5fr 1fr;
-        grid-template-columns: repeat(var(--numImages), 1fr);
+        grid-template-columns: repeat(var(--numPreviewImages), 1fr);
         aspect-ratio: 5 / 3;
         overflow: hidden;
         gap: 10px;
@@ -134,19 +174,6 @@ const headImageUrlStyle = `background-image: url(${headImageUrl});`
         left: 0;
         bottom: 0;
         padding: 10px;
-    }
-
-    #byline {
-        color: white;
-        display: block;
-        margin-bottom: 5px;
-        font-weight: 600;
-    }
-
-    @media (max-width: 400px) {
-        #byline {
-            display: none;
-        }
     }
 
     #bubbles {

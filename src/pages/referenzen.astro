@@ -1,54 +1,90 @@
 ---
 import Layout from '../layouts/no_teaser.astro';
 import ImageGrid from "../components/ImageGrid.astro";
+import {Icon} from 'astro-icon/components';
+
+const allFiles = import.meta.glob("../assets/referenzen/**/*");
+const refs = new Map<string, any>;
+let iter = 0;
+for (const [path, getter] of Object.entries(allFiles)) {
+    const refMatch = /^.*\/(.*?)\/[^/]*$/.exec(path);
+    if (!refMatch || !refMatch[1]) throw new Error("error extracting reference name")
+    const refName = refMatch[1];
+    if (!refs.has(refName))
+        refs.set(refName, {
+            data: undefined,
+            titleImages: [],
+            allImages: [],
+        })
+    const inst = refs.get(refName);
+    if (path.endsWith(".json"))
+        inst.data = await getter()
+    else {
+        inst.allImages.push(getter);
+        if (/titel.[a-zA-Z]+$/.exec(path))
+            inst.titleImages.push(iter)
+        iter++;
+    }
+}
+const cards = Array.from(refs.values())
 ---
 
 <Layout>
-    <div class="card-section dark " id="gallery">
+    <div class="card-section dark" id="gallery">
         <div class="container">
-            <ImageGrid
-                title=""
-                byline=""
-                headImageUrl="https://cdn.chicken69.dev/stuff/QUADRUM-Malerwinkel-02-016-HDR.jpg.jpg"
-                extraImageUrls={[
-                    "https://cdn.chicken69.dev/stuff/QUADRUM-Malerwinkel-02-122.jpg.jpg",
-                    "https://cdn.chicken69.dev/stuff/QUADRUM-Malerwinkel-02-043.jpg.jpg.jpg",
-                    "https://cdn.chicken69.dev/stuff/QUADRUM-Malerwinkel-02-076-HDR.jpg.jpg"
-                ]}
-                bubbles={[
-                    {text: "8 Wochen", icon: "/icons/clock-regular.svg"},
-                    {text: "München", icon: "/icons/hashtag-solid.svg"},
-                    {text: "75m²"}
-                ]}
-            >
-            </ImageGrid>
+            <span class="reference-toggle" data-purpose="Wohnung">
+                <Icon name="mdi:hashtag"/>
+                Wohnung
+            </span>
+            <span class="reference-toggle" data-purpose="xyz">
+                <Icon name="mdi:hashtag"/>
+                Blabla
+            </span>
         </div>
-        <div class="container">
-            <ImageGrid
-                    title=""
-                    byline=""
-                    headImageUrl="https://cdn.chicken69.dev/stuff/Bprojekt-anwalt-0523_storz-12.jpg"
-                    extraImageUrls={[
-                        "https://cdn.chicken69.dev/stuff/Bprojekt-anwalt-0523_storz-7.jpg",
-                        "https://cdn.chicken69.dev/stuff/Bprojekt-anwalt-0523_storz-26.jpg",
-                        "https://cdn.chicken69.dev/stuff/Bprojekt-anwalt-0523_storz-6.jpg",
-                        "https://cdn.chicken69.dev/stuff/Bprojekt-anwalt-0523_storz-31.jpg"
-                    ]}
-                    bubbles={[
-                        {text: "3,5 Monate", icon: "/icons/clock-regular.svg"},
-                        {text: "Theresienhöhe", icon: "/icons/hashtag-solid.svg"},
-                        {text: "430m²"}
-                    ]}
-            >
-            </ImageGrid>
-        </div>
+        {cards.map(data =>
+                <div class="container" data-purpose={data.data.purpose}>
+                    <ImageGrid
+                            titleImages={data.titleImages}
+                            allImages={data.allImages}
+                            data={data.data}
+                    />
+                </div>
+        )}
     </div>
 </Layout>
 
+<script>
+    document.querySelectorAll("#gallery > .container > .reference-toggle").forEach(element =>
+        element.addEventListener("click", () => {
+            element.toggleAttribute("deselected");
+            const purpose = element.getAttribute("data-purpose");
+            if (!purpose) return;
+            [...document.querySelectorAll("#gallery > .container")].filter(
+                container => container.getAttribute("data-purpose") === purpose
+            ).forEach(container => container.toggleAttribute("hidden"));
+        })
+    );
+</script>
+
 <style>
+    .reference-toggle {
+        background-color: white;
+        border-radius: 50px;
+        padding: 5px 15px;
+        margin: 0 5px;
+        color: black;
+        cursor: pointer;
+        user-select: none;
+        transition: filter 0.1s ease-out;
+    }
+
+    .reference-toggle[deselected] {
+        filter: brightness(0.5);
+    }
+
     #gallery {
         display: flex;
         flex-direction: column;
-        padding: 30px 0;
+        padding: 60px 0;
     }
 </style>
