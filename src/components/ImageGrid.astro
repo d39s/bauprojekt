@@ -92,11 +92,11 @@ const headImageUrlStyle = `background-image: url(${headImageUrl});`
         });
         getButton(myOverlay, "#prev").addEventListener("click", () => {
             currentIndex = Math.max(0, currentIndex - 1);
-            setImage(myOverlay, imageDivs, currentIndex)
+            setImage(myOverlay, imageDivs, currentIndex);
             });
         getButton(myOverlay, "#next").addEventListener("click", () => {
-            currentIndex = Math.min(imageDivs.length - 1, currentIndex + 1)
-            setImage(myOverlay, imageDivs, currentIndex)
+            currentIndex = Math.min(imageDivs.length - 1, currentIndex + 1);
+            setImage(myOverlay, imageDivs, currentIndex);
             });
     })
 </script>
