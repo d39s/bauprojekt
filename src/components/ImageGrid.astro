@@ -1,7 +1,5 @@
 ---
 interface Props {
-    title: string;
-    byline: string;
     bubbles: {
         text: string;
         icon?: string;
@@ -10,7 +8,7 @@ interface Props {
     extraImageUrls: string[];
 }
 
-const {title, byline, bubbles, headImageUrl, extraImageUrls} = Astro.props;
+const {bubbles, headImageUrl, extraImageUrls} = Astro.props;
 const numImages = extraImageUrls.length;
 const headImageUrlStyle = `background-image: url(${headImageUrl});`
 ---
@@ -18,8 +16,6 @@ const headImageUrlStyle = `background-image: url(${headImageUrl});`
 <div id="image-grid">
     <div id="head-image" style={headImageUrlStyle}>
         <div id="overlay">
-            <h2>{title}</h2>
-            <span id="byline">{byline}</span>
             <div id="bubbles">
                 {bubbles.map(({text, icon}) => <span class="bubble">
                     {icon === undefined ? "" : <img src={icon} alt="icon">}
@@ -102,10 +98,6 @@ const headImageUrlStyle = `background-image: url(${headImageUrl});`
 </script>
 
 <style define:vars={{numImages}}>
-    h2{
-        margin: 0;
-        color: #fff;
-    }
     #image-grid {
         display: grid;
         grid-template-rows: 1.5fr 1fr;
@@ -149,19 +141,6 @@ const headImageUrlStyle = `background-image: url(${headImageUrl});`
         left: 0;
         bottom: 0;
         padding: 10px;
-    }
-
-    #byline {
-        color: white;
-        display: block;
-        margin-bottom: 5px;
-        font-weight: 600;
-    }
-
-    @media (max-width: 400px) {
-        #byline {
-            display: none;
-        }
     }
 
     #bubbles {
