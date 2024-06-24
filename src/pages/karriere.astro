@@ -380,10 +380,10 @@ import CollapsibleCard from "../components/CollapsibleCard.astro";
 
 <style>
     h1{
-        font-size: 72px;
         margin-bottom: 20px;
     }
     #head{
+        margin-top: 30px;
         margin-bottom: 60px;
     }
     h3{
@@ -517,10 +517,51 @@ import CollapsibleCard from "../components/CollapsibleCard.astro";
     }
 
     @media (min-width: 768px) AND (max-width: 1000px){
-
-}
+        #head{
+            margin-top: 40px;
+            margin-bottom: 30px;
+        }
+        .benefits-grid{
+            margin-bottom: 50px;
+        }
+        form h2{
+            font-size: 40px;
+        }
+        .spacer{
+            margin-bottom: 40px;
+        }
+    }   
 
     @media (max-width: 767px){
-
+        #head{
+            margin-top: 40px;
+            margin-bottom: 30px;
+        }
+        .benefits-grid{
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        form{
+            grid-template-columns: repeat(1, 100%);
+            margin: 35px auto 40px;;
+            padding: 20px;
+        }
+        form h2{
+            font-size: 30px;
+        }
+        input{
+            width: 100%;
+        }
+        #drag-drop-field{
+            padding: 30px 20px;
+        }
+        #drag-drop-field .box__icon{
+            height: 40px;
+            margin-bottom: 20px;
+        }
+        .spacer{
+            margin-bottom: 40px;
+        }
     }
 </style>

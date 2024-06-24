@@ -87,4 +87,36 @@ import { Image } from 'astro:assets';
         gap: 45px;
         margin: 65px 0 90px;
     }
+    @media (min-width: 768px) AND (max-width: 1000px){
+        #intro {
+            grid-template-columns: 1fr 350px;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        .cards{
+            gap: 25px;
+        }
+    }
+
+    @media (max-width: 767px){
+        h2 {
+            margin-top: 30px;
+        }
+        .text{
+            max-width: 90%;
+        }
+        #intro {
+            grid-template-columns: 1fr;
+            gap: 10px;
+            margin-bottom: 40px;
+        }
+        #intro > img{
+            justify-self: center;
+        }
+        .cards{
+            grid-template-columns: 1fr;
+            gap: 25px;
+            margin: 0 8% 30px;
+        }
+    }
 </style>

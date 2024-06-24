@@ -102,6 +102,9 @@ h5{
 h1 > span{
     color: var(--yellow);
 }
+h1{
+    font-size: 72px;
+}
 h2{
     position: relative;
     font-size: 72px;
@@ -161,6 +164,7 @@ a:hover{
 
 @media (max-width: 740px) {
     .container {
+        width: 100%;
         padding: 0 15px;
     }
 }
@@ -182,6 +186,7 @@ a:hover{
     min-height: 750px;
     background: #eee;
     align-items: center;
+    background-position: center;
 }
 
 .teaser h1{
@@ -264,7 +269,7 @@ li{
     h1, h2, h3, h4, h5 {
         margin: 5px 0 35px;
     }
-    h2{
+    h1, h2{
         font-size: 45px;
     }
     p{
@@ -290,7 +295,7 @@ li{
     h1, h2, h3, h4, h5 {
         margin: 5px 0 20px;
     }
-    h2{
+    h1, h2{
         font-size: 30px;
         line-height: 1.3;
     }

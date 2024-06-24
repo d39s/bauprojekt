@@ -96,6 +96,17 @@ const optimizedTeaser = await getImage({src: teaser(), format: 'webp'});
         z-index: 20;
         top: 0;
     }
+    @media (min-width: 768px) AND (max-width: 1000px){
+        .teaser{
+            min-height: 700px;
+        }
+    }
+
+    @media (max-width: 767px){
+        .teaser{
+            min-height: 500px;
+        }
+    }
 </style>
 
 <style define:vars={{topBg}}>
