@@ -2,7 +2,7 @@
 import '../styles/global.css';
 const currentPath = new URL(Astro.request.url).pathname;
 ---
-<header>
+<header class="header">
     <div class="container nav">
         <a href="/">
             <img alt="Bauprojekt GmbHby FMC-Köhler" src="/img/logo.svg">
@@ -16,6 +16,10 @@ const currentPath = new URL(Astro.request.url).pathname;
             <a class={currentPath === "/karriere" ? "active" : ""} href="/karriere">Karriere</a>
             <a id="contact" class={currentPath === "/kontakt" ? "active" : ""} href="/kontakt">Kontakt</a>
         </div>
+
+        <span class="mobile-menu  material-symbols-outlined">
+            <svg xmlns="http://www.w3.org/2000/svg" width="45px" height="45px" viewBox="0 0 24 24"><path fill="currentColor" d="M3 8V7h17v1zm17 4v1H3v-1zM3 17h17v1H3z"/></svg>
+        </span>
     </div>
 </header>
 
@@ -62,9 +66,47 @@ const currentPath = new URL(Astro.request.url).pathname;
         background-color: var(--yellow);
         border-radius: 10px;
     }
-    @media (min-width: 768px) AND (max-width: 1000px){
-        header {
+    .mobile-menu{
+        display: none;
+        cursor: pointer;
+    }
+    @media (max-width: 1000px){
+        .header {
             mask-image: radial-gradient(ellipse 100% 40px at center bottom, transparent 50%, black 52%);
+        }
+        .header.active{
+            mask-image: none;
+        }
+        img{
+            height: 60px;
+        }
+        .mobile-menu{
+            display: block;
+        }
+        .nav-links {
+            display: none;
+            gap: 10px;
+            position: absolute;
+            top: 75px;
+            right: -100%;
+            width: 100%;
+            height: auto;
+            padding: 15px 25px 25px;
+            align-items: center;
+            text-align: center;
+            background-color: #fff;
+            color: white;
+
+            transition: 0.15s ease-in-out;
+        }
+        .nav-links > a{
+            padding: 10px;
+        }
+
+        .header.active .nav-links {
+            display: grid;
+            grid-template-columns: 1fr;
+            right: 0;
         }
     }
 
@@ -73,5 +115,17 @@ const currentPath = new URL(Astro.request.url).pathname;
             padding: 10px 0 35px;
             mask-image: radial-gradient(ellipse 100% 25px at center bottom, transparent 50%, black 54%);
         }
+        img{
+            height: 40px;
+        }
     }
 </style>
+
+<script>
+    const hamburgerMenu = document.querySelector(".mobile-menu");
+    const nav = document.querySelector(".header");
+
+    hamburgerMenu.addEventListener("click", () => {
+        nav.classList.toggle("active")
+    });
+</script>

@@ -2,6 +2,20 @@
 import Layout from '../layouts/with_teaser.astro';
 import TeamCard from "../components/TeamCard.astro";
 import team2 from '../assets/team_besprechung3.jpg';
+import partner1 from '../assets/partner_logos/aik.png';
+import partner2 from '../assets/partner_logos/allianz.svg';
+import partner3 from '../assets/partner_logos/atradius.png';
+import partner4 from '../assets/partner_logos/baubuero.svg';
+import partner5 from '../assets/partner_logos/bnp_paribas_real_estate.svg';
+import partner6 from '../assets/partner_logos/cabs-wbm.svg';
+import partner7 from '../assets/partner_logos/cadooz.jpg';
+import partner8 from '../assets/partner_logos/canadiansolar.png';
+import partner9 from '../assets/partner_logos/deka_investmentfonds.svg';
+import partner10 from '../assets/partner_logos/hoergestetter_architektur.svg';
+import partner11 from '../assets/partner_logos/intega.svg';
+import partner12 from '../assets/partner_logos/pkv_stiftung.gif';
+import partner13 from '../assets/partner_logos/quadviso.svg';
+import partner14 from '../assets/partner_logos/testbirds.svg';
 import { Image } from 'astro:assets';
 
 ---
@@ -27,6 +41,8 @@ import { Image } from 'astro:assets';
                 </div>
             </div>
         </div>
+
+        <!-- Teambilder -->
         <div class="card-section dark">
             <div class="container">
                 <h2 class="center">Unser Team<span>.</span></h2>
@@ -43,6 +59,29 @@ import { Image } from 'astro:assets';
                               imagePath="/src/assets/team1.jpg"></TeamCard>
                     <TeamCard name="Yasser Saleh" position="Projektleiter"
                               imagePath="/src/assets/team3.jpg"></TeamCard>
+                </div>
+            </div>
+        </div>
+
+        <!-- Partnerfirmen -->
+        <div class="card-section light">
+            <div class="container">
+                <h2 class="center">Unser Partner<span>.</span></h2>
+                <div class="partner-grid">
+                    <Image class="round-img" src={partner1} alt="AIK"></Image>
+                    <Image class="round-img" src={partner2} alt="Allianz"></Image>
+                    <Image class="round-img" src={partner3} alt="Atradius"></Image>
+                    <Image class="round-img" src={partner4} alt="Baubüro"></Image>
+                    <Image class="round-img" src={partner5} alt="BNP Paribas Real Estate"></Image>
+                    <Image class="round-img" src={partner6} alt="CABS Immobilien"></Image>
+                    <Image class="round-img" src={partner7} alt="Cadooz"></Image>
+                    <Image class="round-img" src={partner8} alt="Canadian Solar"></Image>
+                    <Image class="round-img" src={partner9} alt="Deka Investmentfonds"></Image>
+                    <Image class="round-img" src={partner10} alt="Hörgestetter Architektur"></Image>
+                    <Image class="round-img" src={partner11} alt="Intega"></Image>
+                    <Image class="round-img" src={partner12} alt="Paula-Kubitschek-Vogel Stiftung"></Image>
+                    <Image class="round-img" src={partner13} alt="Quadviso"></Image>
+                    <Image class="round-img" src={partner14} alt="Testbirds"></Image>
                 </div>
             </div>
         </div>
@@ -87,6 +126,17 @@ import { Image } from 'astro:assets';
         gap: 45px;
         margin: 65px 0 90px;
     }
+    .partner-grid{
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 50px;
+        padding: 5px 0 90px;
+    }
+    .partner-grid > img{
+        width: 170px;
+        justify-self: center;
+        align-self: center;
+    }
     @media (min-width: 768px) AND (max-width: 1000px){
         #intro {
             grid-template-columns: 1fr 350px;
@@ -95,6 +145,14 @@ import { Image } from 'astro:assets';
         }
         .cards{
             gap: 25px;
+        }
+        .partner-grid{
+            grid-template-columns: repeat(4, 1fr);
+            gap: 50px;
+            padding: 0 0 75px;
+        }
+        .partner-grid > img{
+            width: 160px;
         }
     }
 
@@ -117,6 +175,25 @@ import { Image } from 'astro:assets';
             grid-template-columns: 1fr;
             gap: 25px;
             margin: 0 8% 30px;
+        }
+        .partner-grid{
+            grid-template-columns: repeat(3, 1fr);
+            grid-auto-rows: 1fr;
+            gap: 30px;
+            padding: 0 0 50px;
+        }
+        .partner-grid > img{
+            width: 150px;
+        }
+    }
+    @media (max-width: 500px){
+        .partner-grid{
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+            padding: 0 0 50px;
+        }
+        .partner-grid > img{
+            width: 120px;
         }
     }
 </style>

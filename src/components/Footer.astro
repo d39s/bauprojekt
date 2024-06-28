@@ -58,9 +58,7 @@
     </div>
     <div id="sub-footer">
         <div class="container">
-            <div>
-                © Bauprojekt GmbH by FMC Köhler
-            </div>
+            © Bauprojekt GmbH by FMC Köhler
         </div>
     </div>
 
@@ -84,7 +82,7 @@
     }
     #footer-infos{
         display: grid;
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: auto 1fr 1fr 1fr;
         gap: 30px;
     }
     .footer-headline{
@@ -98,11 +96,9 @@
         
     }
     #sub-footer > .container{
-        display: flex;
         padding-top: 25px;
         padding-bottom: 45px;
         border-top: 1px solid var(--gray);
-        justify-content: space-between;
     }
     .footer-legals{
         display: flex;
@@ -123,15 +119,22 @@
     }
 
     @media (max-width: 767px){
+        footer{
+            line-height: 1.6;
+        }
         #footer-infos{
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: 1fr;
             gap: 30px;
+            text-align: center;
         }
         footer-block{
             font-size: 15px;
         }
         .footer-headline{
             font-size: 18px;
+        }
+        #sub-footer{
+            text-align: center;
         }
     }
 </style>

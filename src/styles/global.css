@@ -266,6 +266,9 @@ li{
 
 @media (min-width: 768px) AND (max-width: 1000px){
 
+    body{
+        padding-top: 95px;
+    }
     h1, h2, h3, h4, h5 {
         margin: 5px 0 35px;
     }
@@ -291,6 +294,10 @@ li{
 }
 
 @media (max-width: 767px){
+
+    body{
+        padding-top: 70px;
+    }
 
     h1, h2, h3, h4, h5 {
         margin: 5px 0 20px;
