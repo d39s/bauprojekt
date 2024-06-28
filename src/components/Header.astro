@@ -125,7 +125,10 @@ const currentPath = new URL(Astro.request.url).pathname;
     const hamburgerMenu = document.querySelector(".mobile-menu");
     const nav = document.querySelector(".header");
 
+    if(!hamburgerMenu) throw Error("Element not found")
+
     hamburgerMenu.addEventListener("click", () => {
+        if(!nav) throw Error("Element not found")
         nav.classList.toggle("active")
     });
 </script>
