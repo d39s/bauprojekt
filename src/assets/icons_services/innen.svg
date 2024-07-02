@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 347.234 225.862">
+  <defs>
+    <style>
+      .cls-1, .cls-2, .cls-3 {
+        fill: none;
+      }
+
+      .cls-1, .cls-2, .cls-3, .cls-4, .cls-5, .cls-6 {
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+
+      .cls-1, .cls-2, .cls-5 {
+        stroke-width: 12px;
+      }
+
+      .cls-1, .cls-3, .cls-5, .cls-6 {
+        stroke: #3b3b3c;
+      }
+
+      .cls-7 {
+        fill: #fbbb4e;
+      }
+
+      .cls-7, .cls-8 {
+        stroke-width: 0px;
+      }
+
+      .cls-2 {
+        stroke: #414042;
+      }
+
+      .cls-3, .cls-6 {
+        stroke-width: 9px;
+      }
+
+      .cls-4 {
+        fill: #3d3e3e;
+        stroke: #3d3e3e;
+        stroke-width: 10px;
+      }
+
+      .cls-8, .cls-5, .cls-6 {
+        fill: #fff;
+      }
+    </style>
+  </defs>
+  <g id="Layer_2-2" data-name="Layer 2">
+    <rect class="cls-7" x="67.462" y="39.064" width="98.671" height="56.186"/>
+    <rect class="cls-7" x="53.771" y="151.021" width="41.617" height="33.447"/>
+    <g>
+      <rect class="cls-8" x="59.6" y="49.211" width="51.273" height="11.745" transform="translate(-13.984 76.405) rotate(-45)"/>
+      <rect class="cls-8" x="58.121" y="60.674" width="74.382" height="5.904" transform="translate(-17.074 86.031) rotate(-45)"/>
+    </g>
+    <rect class="cls-8" x="140.383" y="79.689" width="30.962" height="11.745" transform="translate(-14.85 135.273) rotate(-45)"/>
+    <g>
+      <line class="cls-2" x1="6" y1="219.862" x2="341.234" y2="219.862"/>
+      <rect class="cls-1" x="212.09" y="29.378" width="103.66" height="189.447"/>
+      <rect class="cls-1" x="67.324" y="38.569" width="98.809" height="56.681"/>
+      <path class="cls-1" d="M55.239,120.016h40.34v14.681c0,7.68-6.235,13.915-13.915,13.915h-12.511c-7.68,0-13.915-6.235-13.915-13.915v-14.681h0Z"/>
+      <rect class="cls-1" x="57.239" y="162.144" width="37.532" height="22.723" rx="8.043" ry="8.043"/>
+      <path class="cls-3" d="M65.027,187.261l-10.388,29.777s-7.229-.239-7.181-.479,2.777-32.553,2.777-32.553l14.793,3.255Z"/>
+      <polygon class="cls-6" points="50.266 166.628 32.745 218.33 45.021 218.33 65.436 166.34 50.266 166.628"/>
+      <polygon class="cls-3" points="169.664 167.416 187.185 219.118 174.909 219.118 154.494 167.129 169.664 167.416"/>
+      <path class="cls-3" d="M79.628,187.261l10.388,29.777s7.229-.239,7.181-.479-2.777-32.553-2.777-32.553l-14.793,3.255Z"/>
+      <polygon class="cls-4" points="188.41 161.973 34.069 161.973 31.069 147.824 191.41 147.824 188.41 161.973"/>
+      <line class="cls-5" x1="311.186" y1="74.84" x2="213.527" y2="74.84"/>
+      <line class="cls-5" x1="311.186" y1="113.33" x2="213.527" y2="113.33"/>
+      <line class="cls-5" x1="311.186" y1="156.223" x2="213.527" y2="156.223"/>
+      <line class="cls-5" x1="270.399" y1="186.096" x2="254.314" y2="186.096"/>
+      <polyline class="cls-1" points="96.335 35.362 116.122 6 135.144 36"/>
+    </g>
+  </g>
+</svg>

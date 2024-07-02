@@ -78,7 +78,7 @@ import { Image } from 'astro:assets';
                     <Image class="round-img" src={partner8} alt="Canadian Solar"></Image>
                     <Image class="round-img" src={partner9} alt="Deka Investmentfonds"></Image>
                     <Image class="round-img" src={partner10} alt="Hörgestetter Architektur"></Image>
-                    <Image class="round-img" src={partner11} alt="Intega"></Image>
+                    <Image class="round-img logo-filter" src={partner11} alt="Intega"></Image>
                     <Image class="round-img" src={partner12} alt="Paula-Kubitschek-Vogel Stiftung"></Image>
                     <Image class="round-img" src={partner13} alt="Quadviso"></Image>
                     <Image class="round-img" src={partner14} alt="Testbirds"></Image>
@@ -136,6 +136,9 @@ import { Image } from 'astro:assets';
         width: 170px;
         justify-self: center;
         align-self: center;
+    }
+    .logo-filter{
+        filter: brightness(0) saturate(100%) invert(11%) sepia(77%) saturate(5850%) hue-rotate(197deg) brightness(100%) contrast(102%);
     }
     @media (min-width: 768px) AND (max-width: 1000px){
         #intro {
