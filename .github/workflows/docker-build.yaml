@@ -16,7 +16,7 @@ jobs:
       - uses: jemand771/docker-build-action@main
         with:
           images: |
-            ${{ secrets.NEXUS_HOST }}/bauprojekt
+            ${{ secrets.NEXUS_HOST }}/library/bauprojekt
           GITHUB_TOKEN: ${{ github.token }}
           push_strategy: push
           platforms: linux/amd64
