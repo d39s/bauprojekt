@@ -1,6 +1,6 @@
 ---
 import '../styles/global.css';
-const currentPath = new URL(Astro.request.url).pathname;
+const currentPath = Astro.url.pathname;
 ---
 <header class="header">
     <div class="container nav">
