@@ -10,11 +10,11 @@ const currentPath = new URL(Astro.request.url).pathname;
         
         <div class="nav-links">
             <a class={currentPath === "/" ? "active" : ""} href="/">Startseite</a>
-            <a class={currentPath === "/team" ? "active" : ""} href="/team">Über uns</a>
-            <a class={currentPath === "/angebot" ? "active" : ""} href="/angebot">Angebot</a>
-            <a class={currentPath === "/referenzen" ? "active" : ""} href="/referenzen">Referenzen</a>
-            <a class={currentPath === "/karriere" ? "active" : ""} href="/karriere">Karriere</a>
-            <a id="contact" class={currentPath === "/kontakt" ? "active" : ""} href="/kontakt">Kontakt</a>
+            <a class={currentPath === "/team/" ? "active" : ""} href="/team/">Über uns</a>
+            <a class={currentPath === "/angebot/" ? "active" : ""} href="/angebot/">Angebot</a>
+            <a class={currentPath === "/referenzen/" ? "active" : ""} href="/referenzen/">Referenzen</a>
+            <a class={currentPath === "/karriere/" ? "active" : ""} href="/karriere/">Karriere</a>
+            <a id="contact" class={currentPath === "/kontakt/" ? "active" : ""} href="/kontakt/">Kontakt</a>
         </div>
 
         <span class="mobile-menu  material-symbols-outlined">
