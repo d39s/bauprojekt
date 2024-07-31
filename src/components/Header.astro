@@ -56,10 +56,13 @@ const currentPath = new URL(Astro.request.url).pathname;
         text-align: center;
         text-decoration: none;
         color: #2f2f34;
+        font-weight: 600;
+        padding: 5px 0;
+        border-bottom: 2px solid transparent;
     }
 
     a.active {
-        color: black;
+        border-color: var(--gray);
     }
     #contact{
         padding: 10px 25px;
@@ -91,18 +94,21 @@ const currentPath = new URL(Astro.request.url).pathname;
             right: -100%;
             width: 100%;
             height: auto;
-            padding: 15px 25px 25px;
+            padding: 15px 25px 50px;
             align-items: center;
             text-align: center;
             background-color: #fff;
             color: white;
-
+            mask-image: radial-gradient(ellipse 100% 40px at center bottom, transparent 50%, black 52%);
             transition: 0.15s ease-in-out;
         }
         .nav-links > a{
             padding: 10px;
+            border: none;
         }
-
+        .nav-links > a.active{
+            text-decoration: underline;
+        }
         .header.active .nav-links {
             display: grid;
             grid-template-columns: 1fr;
@@ -111,8 +117,12 @@ const currentPath = new URL(Astro.request.url).pathname;
     }
 
     @media (max-width: 767px){
-        header {
+        .header {
             padding: 10px 0 35px;
+            mask-image: radial-gradient(ellipse 100% 25px at center bottom, transparent 50%, black 54%);
+        }
+        .nav-links{
+            padding-bottom: 35px;
             mask-image: radial-gradient(ellipse 100% 25px at center bottom, transparent 50%, black 54%);
         }
         img{
