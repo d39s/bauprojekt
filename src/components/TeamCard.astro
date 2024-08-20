@@ -46,7 +46,16 @@ if (!images[imagePath]) throw new Error(`"${imagePath}" does not exist in glob: 
         max-height: 30vw;
         object-fit: cover;
     }
-
+    #image-container{
+        transition: 0.6s ease;
+    }
+    #image-container:hover{ 
+        -webkit-transform: scale(1.1);
+        -ms-transform: scale(1.1);
+        transform: scale(1.1);
+        transition: 0.6s ease;
+        z-index: 5;
+    }
     #image-container:after {
         content: "";
         position: absolute;
