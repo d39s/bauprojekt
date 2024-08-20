@@ -67,7 +67,15 @@ const currentPath = Astro.url.pathname;
     #contact{
         padding: 10px 25px;
         background-color: var(--yellow);
+        border: 2px solid var(--yellow);
         border-radius: 10px;
+    }
+    #contact:hover{
+        opacity: 0.8;
+        transition: ease-in 0.2s;
+    }
+    a.active#contact{
+        text-decoration: underline;
     }
     .mobile-menu{
         display: none;

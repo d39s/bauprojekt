@@ -1,5 +1,5 @@
 ---
-import Layout from '../layouts/no_teaser.astro';
+import Layout from '../layouts/with_teaser.astro';
 import angebot1 from '../assets/icons_aufgaben/1_bauplan.png';
 import angebot2 from '../assets/icons_aufgaben/2_ortsbesichtigung.png';
 import angebot3 from '../assets/icons_aufgaben/3_kostenschaetzung.png';
@@ -8,7 +8,11 @@ import angebot5 from '../assets/icons_aufgaben/5_angebot.png';
 import { Image } from 'astro:assets';
 ---
 
-<Layout>
+<Layout  
+    topBg="/src/assets/teaser/bauprojekt_teaser.jpg" 
+    title="Ihr Angebot - Schritt für Schritt" 
+    description="Maßgeschneiderte Lösungen, wettbewerbsfähige Preise und erstklassiger Service. Jetzt individuelles Angebot anfordern!"
+    >
     <div class="card-section dark">
         <div class="container">
             <h2>Der Weg zu Ihrem Angebot<span>.</span></h2>

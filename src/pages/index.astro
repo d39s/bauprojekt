@@ -9,10 +9,9 @@ import HomeRequirements from '../components/home/requirements.astro';
 import HomeReferences from '../components/home/references.astro';
 import HomeCareer from '../components/home/career.astro';
 import HomeBroschuere from '../components/home/broschuere.astro';
-//const {topBg = "white", topFilter = "", stripeBg = "var(--yellow)", bottomBg = "var(--gray)"} = Astro.props;
 
 import { getImage } from "astro:assets";
-import teaser from "../assets/teaser_home.jpg";
+import teaser from "../assets/teaser/teaser_home.jpg";
 
 const optimizedTeaser = await getImage({src: teaser, format: 'webp'});
 ---
@@ -21,11 +20,11 @@ const optimizedTeaser = await getImage({src: teaser, format: 'webp'});
 <html lang="de">
 <head>
     <meta charset="UTF-8"/>
-    <meta name="description" content="Bauprojekt"/>
     <meta name="viewport" content="width=device-width"/>
     <link rel="icon" type="image/svg+xml" href="/favicon.png"/>
     <meta name="generator" content={Astro.generator}/>
-    <title>Bauprojekt</title>
+    <title>Bauprojekt GmbH by FMC Köhler</title>
+    <meta name="description" content="Wir sind Ihr PartnerVerwirklichen Sie Ihre Vision: Von der Idee bis zur schlüsselfertigen Umsetzung. Planen Sie mit uns funktionale, inspirierende Innenräume."/>
 </head>
 <body>
     <Header/>

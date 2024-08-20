@@ -7,11 +7,11 @@ import type {ImageMetadata} from 'astro';
 
 interface Props {
     topBg: string;
+    title: string;
+    description: string;
 }
 
-
-
-const {topBg} = Astro.props;
+const {topBg, title, description} = Astro.props;
 const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/teaser/*.{jpeg,jpg,png,gif}')
 
 const teaser = images[topBg];
@@ -26,11 +26,11 @@ const optimizedTeaser = await getImage({src: teaser(), format: 'webp'});
 <html lang="de">
 <head>
     <meta charset="UTF-8"/>
-    <meta name="description" content="Bauprojekt"/>
     <meta name="viewport" content="width=device-width"/>
     <link rel="icon" type="image/svg+xml" href="/favicon.png"/>
     <meta name="generator" content={Astro.generator}/>
-    <title>Bauprojekt</title>
+    <title>{title}</title>
+    <meta name="description" content={description}/>
 </head>
 <body>
     <Header/>
