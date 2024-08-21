@@ -70,7 +70,7 @@ const optimizedTeamBg = await getImage({src: team_bg, format: 'webp'});
     <div class="card-section team-bg" style={`background-image: url(${optimizedTeamBg.src});`}>
         <div class="container">
 
-                <form method="post" id="contact-form">
+                <form method="post" action="/kontakt/post" id="contact-form">
                     <!--TODO required fields-->
                     <h2 class="wide">Schreiben Sie uns<span>!</span></h2>
                     <input name="firma" placeholder="Firma" class="wide"/>
