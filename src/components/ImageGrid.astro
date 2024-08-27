@@ -10,13 +10,12 @@ interface Props {
         area: string;
     }
     titleImages: number[];
-    allImages: GetImageResult[];
+    allImages: Promise<GetImageResult>[];
 }
 const {data, titleImages, allImages} = Astro.props;
 const numPreviewImages = titleImages.length - 1;
 const headerImage = allImages.filter((_, idx) => titleImages.includes(idx))[0];
 if (!headerImage) throw new Error("");
-const headImageUrlStyle = `background-image: url(${headerImage.src});`
 const bubbles = [
     {
         text: data.purpose,
@@ -38,7 +37,7 @@ const bubbles = [
 ---
 
 <div id="image-grid">
-    <div id="head-image" style={headImageUrlStyle}>
+    <div id="head-image" style={`background-image: url(${(await headerImage).src});`}>
         <div id="overlay">
             <div id="bubbles">
                 {bubbles.map(({text, icon}) => <span class="bubble">
