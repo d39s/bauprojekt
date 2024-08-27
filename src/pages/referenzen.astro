@@ -3,9 +3,8 @@ import Layout from '../layouts/no_teaser.astro';
 import ImageGrid from "../components/ImageGrid.astro";
 import {Icon} from 'astro-icon/components';
 
-const allFiles = import.meta.glob("../assets/referenzen/**/*");
+const allFiles = import.meta.glob("../assets/referenzen/*/*.{json,png,jpg}");
 const refs = new Map<string, any>;
-let iter = 0;
 for (const [path, getter] of Object.entries(allFiles)) {
     const refMatch = /^.*\/(.*?)\/[^/]*$/.exec(path);
     if (!refMatch || !refMatch[1]) throw new Error("error extracting reference name")
@@ -22,11 +21,10 @@ for (const [path, getter] of Object.entries(allFiles)) {
     else {
         inst.allImages.push(getter);
         if (/titel.[a-zA-Z]+$/.exec(path))
-            inst.titleImages.push(iter)
-        iter++;
+            inst.titleImages.push(inst.allImages.length - 1)
     }
 }
-const cards = Array.from(refs.values())
+const cards = Array.from(refs.values());
 ---
 
 <Layout
