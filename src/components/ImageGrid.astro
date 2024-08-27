@@ -1,4 +1,5 @@
 ---
+import type { GetImageResult } from 'astro';
 import {Icon} from 'astro-icon/components'
 
 interface Props {
@@ -9,13 +10,13 @@ interface Props {
         area: string;
     }
     titleImages: number[];
-    allImages: (() => Promise<any>)[];
+    allImages: GetImageResult[];
 }
 const {data, titleImages, allImages} = Astro.props;
 const numPreviewImages = titleImages.length - 1;
 const headerImage = allImages.filter((_, idx) => titleImages.includes(idx))[0];
 if (!headerImage) throw new Error("");
-const headImageUrlStyle = `background-image: url(${(await headerImage()).default.src});`
+const headImageUrlStyle = `background-image: url(${headerImage.src});`
 const bubbles = [
     {
         text: data.purpose,
@@ -50,10 +51,10 @@ const bubbles = [
     </div>
     {
         (await Promise.all(
-            allImages.slice(1).map(getter => getter())
+            allImages.slice(1)
         )).map(
             (data, idx) => ({
-                style: `background-image: url(${data.default.src}); ${titleImages.includes(idx + 1) ? "" : "display: none;"}`,
+                style: `background-image: url(${data.src}); ${titleImages.includes(idx + 1) ? "" : "display: none;"}`,
                 idx: idx + 1
             })).map(({style, idx}) =>
                 <div style={style} data-idx={idx}></div>

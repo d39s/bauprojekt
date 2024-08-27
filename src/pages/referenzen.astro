@@ -2,8 +2,9 @@
 import Layout from '../layouts/no_teaser.astro';
 import ImageGrid from "../components/ImageGrid.astro";
 import {Icon} from 'astro-icon/components';
+import { getImage } from 'astro:assets';
 
-const allFiles = import.meta.glob("../assets/referenzen/*/*.{json,png,jpg}");
+const allFiles = import.meta.glob<{default: ImageMetadata}>("../assets/referenzen/*/*.{json,png,jpg}");
 const refs = new Map<string, any>;
 for (const [path, getter] of Object.entries(allFiles)) {
     const refMatch = /^.*\/(.*?)\/[^/]*$/.exec(path);
@@ -19,7 +20,7 @@ for (const [path, getter] of Object.entries(allFiles)) {
     if (path.endsWith(".json"))
         inst.data = await getter()
     else {
-        inst.allImages.push(getter);
+        inst.allImages.push(getImage({src: getter(), format: "webp"}));
         if (/titel.[a-zA-Z]+$/.exec(path))
             inst.titleImages.push(inst.allImages.length - 1)
     }
