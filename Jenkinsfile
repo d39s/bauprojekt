@@ -1,7 +1,7 @@
 buildDocker(
     rclone: [[
         url: 'nextcloud-url',
-        username: 'nextcloud-user',
+        username: 'nextcloud-username',
         password: 'nextcloud-password',
         from: '/Anpassung Referenzen/',
         to: 'src/assets/referenzen/',
