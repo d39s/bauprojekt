@@ -1,5 +1,8 @@
 buildDocker(
-    rclone: [
+    rclone: [[
+        url: 'nextcloud-url',
+        username: 'nextcloud-user',
+        password: 'nextcloud-password',
         from: '/Anpassung Referenzen/',
         to: 'src/assets/referenzen/',
         // you can ignore the trailing space here. it isn't required and
@@ -8,6 +11,6 @@ buildDocker(
             '--include',
             '/{{referenz-\\d+/[^/]+\\.(json|jpg|png)}}'
         ]
-    ],
+    ]],
     compressed_caching: false
 )
