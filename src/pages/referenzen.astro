@@ -42,9 +42,21 @@ const cards = Array.from(refs.values());
                 <Icon name="mdi:hashtag"/>
                 Blabla
             </span>
+            <span id="sort-by-area">
+                <Icon name="mdi:surface-area" />
+                <span>Fläche: unsortiert</span>
+                <Icon name="mdi:triangle" class="hidden" />
+                <Icon name="mdi:triangle" class="hidden" style="transform: rotate(180deg)"/>
+            </span>
+            <span id="sort-by-time">
+                <Icon name="mdi:access-time" />
+                <span>Zeit: unsortiert</span>
+                <Icon name="mdi:triangle" class="hidden" />
+                <Icon name="mdi:triangle" class="hidden" style="transform: rotate(180deg)"/>
+            </span>
         </div>
         {cards.map(data =>
-                <div class="container" data-purpose={data.data.purpose}>
+                <div class="container" data-purpose={data.data.purpose} data-area={data.data.area} data-time={data.data.time}>
                     <ImageGrid
                             titleImages={data.titleImages}
                             allImages={data.allImages}
@@ -66,10 +78,93 @@ const cards = Array.from(refs.values());
             ).forEach(container => container.toggleAttribute("hidden"));
         })
     );
+    const sortByAreaSpan = document.querySelector<HTMLSpanElement>("#gallery > .container > #sort-by-area");
+    const sortByTimeSpan = document.querySelector<HTMLSpanElement>("#gallery > .container > #sort-by-time");
+    // null -> true -> false -> true -> false -> ...
+    let sortByArea: boolean | null = null;
+    let sortByTime: boolean | null = null;
+    if (!sortByAreaSpan || !sortByTimeSpan) throw Error("failed to initialize sorting");
+
+    function sortingStateName(state: boolean | null): string {
+        if(state === null) return "unsortiert";
+        if(state) return "aufsteigend";
+        return "absteigend";
+    }
+
+    function setHiddenClass(node: Element, show: boolean) {
+        if(node.classList.contains("hidden") && show) node.classList.remove("hidden");
+        if(!node.classList.contains("hidden") && !show) node.classList.add("hidden");
+    }
+
+    function cycleSorting(node: HTMLSpanElement, currentState: boolean | null, targetState: boolean | null): boolean | null {
+        const [textSpan, ascIcon, descIcon] = [...node.children].slice(1);
+        if(!textSpan || !ascIcon || !descIcon) throw Error("failed to toggle sorting");
+        textSpan.textContent = (textSpan.textContent ?? "").replace(sortingStateName(currentState), sortingStateName(targetState));
+        setHiddenClass(ascIcon, !!targetState);
+        setHiddenClass(descIcon, targetState === false);
+        return targetState;
+    }
+
+    function performSort(fun: (a: Element, b: Element) => number) {
+        const gallery = document.querySelector("#gallery");
+        if(!gallery) throw Error("failed to sort");
+        gallery.replaceChildren(...[...gallery.children].toSorted((a: Element, b: Element) => {
+            // keep menu at the top
+            if (!a.hasAttribute("data-purpose")) return -1;
+            if (!b.hasAttribute("data-purpose")) return 1;
+            return fun(a, b);
+        }));
+    }
+
+    function getArea(node: Element): number {
+        return Number.parseInt(node.getAttribute("data-area")?.replace("m²", "") ?? "")
+    }
+
+    function getTime(node: Element): number {
+        const raw = node.getAttribute("data-time");
+        if(!raw) return NaN;
+        for(const [regex, multiplier] of [
+            [/^(\d+([.,]\d+)?) Tage?$/, 1],
+            [/^(\d+([.,]\d+)?) Wochen?$/, 7],
+            [/^(\d+([.,]\d+)?) Monate?$/, 30],
+            [/^(\d+([.,]\d+)?) Jahre?$/, 365],
+        ] as const) {
+            const match = raw.match(regex);
+            if (match && match[1]) return multiplier * Number.parseFloat(match[1].replace(",", "."));
+        }
+        return NaN;
+    }
+
+    function buildSorter(fun: (node: Element) => number, direction: boolean) {
+        return (a: Element, b: Element) => {
+            const areaA = fun(a);
+            const areaB = fun(b);
+            // unsortables go at the bottom
+            if(isNaN(areaA) && isNaN(areaB)) return 0;
+            if(isNaN(areaA)) return 1;
+            if(isNaN(areaB)) return -1;
+            if(areaA === areaB) return 0;
+            if(areaA > areaB === direction) return 1;
+            return -1;
+        };
+    }
+
+    sortByAreaSpan.addEventListener("click", () => {
+        sortByTime = cycleSorting(sortByTimeSpan, sortByTime, null);
+        sortByArea = cycleSorting(sortByAreaSpan, sortByArea, !sortByArea);
+        performSort(buildSorter(getArea, !!sortByArea));
+    });
+
+    sortByTimeSpan.addEventListener("click", () => {
+        sortByArea = cycleSorting(sortByAreaSpan, sortByArea, null);
+        sortByTime = cycleSorting(sortByTimeSpan, sortByTime, !sortByTime);
+        performSort(buildSorter(getTime, !!sortByTime));
+    });
+
 </script>
 
 <style>
-    .reference-toggle {
+    .reference-toggle, #sort-by-area, #sort-by-time {
         background-color: white;
         border-radius: 50px;
         padding: 5px 15px;
@@ -77,6 +172,10 @@ const cards = Array.from(refs.values());
         color: black;
         cursor: pointer;
         user-select: none;
+        display: inline-flex;
+        align-items: center;
+    }
+    .reference-toggle {
         transition: filter 0.1s ease-out;
     }
 
@@ -88,5 +187,9 @@ const cards = Array.from(refs.values());
         display: flex;
         flex-direction: column;
         padding: 60px 0;
+    }
+
+    .hidden {
+        display: none;
     }
 </style>
