@@ -21,7 +21,8 @@ images.sort((a, b) => {
 import { Image } from 'astro:assets';
 ---
 
-<div class="container">
+<div class="container" style="position: relative;">
+    <div id="broschuere"></div>
     <h2>Unsere Broschüre<span>.</span></h2>
     <div class="broschuere-grid">
         <img class="round-img" src={broschuere.src} width="500" alt="Aktuelle Broschüre">
@@ -33,7 +34,7 @@ import { Image } from 'astro:assets';
             <p>
                 Laden Sie die Broschüre herunter und erhalten Sie alle wichtigen Informationen auf einen Blick.
             </p>
-            <a href="/media/broschuere_bauprojekt_gmbh_by_fmc_koehler.pdf">
+            <a href="/media/broschuere_bauprojekt_gmbh_by_fmc_koehler.pdf" target="_blank">
                 <button class="cta-btn">Downloaden</button>
             </a>
             <button id="openLightbox" class="cta-btn flipbook-btn">Broschüre anzeigen</button>
@@ -77,6 +78,11 @@ import { Image } from 'astro:assets';
 
 
 <style>
+    #broschuere{
+        position: absolute;
+        top: -140px;
+        height: 0;
+    }
     .broschuere-grid{
         display: grid;
         grid-template-columns: 500px 1fr;
@@ -91,6 +97,9 @@ import { Image } from 'astro:assets';
         align-self: center;
     }
     @media (min-width: 768px) AND (max-width: 1000px){
+        #broschuere{
+            top: -120px;
+        }
         .broschuere-grid{
             display: grid;
             grid-template-columns: 320px 1fr;
@@ -154,6 +163,7 @@ import { Image } from 'astro:assets';
         display: flex;
         margin: auto;
         width: 50%;
+        max-width: 700px;
         aspect-ratio: 1/1;
         margin: auto;
         /*1* let pointer event go trough pages of lower Z than .book */
@@ -258,4 +268,26 @@ import { Image } from 'astro:assets';
     };
 
     document.querySelectorAll(".book").forEach(flipBook);
+
+    const MOBILE_BREAKPOINT = 768;
+
+    function isMobileScreen() {
+        return window.innerWidth < MOBILE_BREAKPOINT;
+    }
+
+    function open_broschuere() {
+        if (window.location.hash === '#broschuere') {
+            const lightbox = document.getElementById('lightbox');
+            if(lightbox){
+                lightbox.style.display = 'block';
+            }
+        }
+    }
+
+    if(!isMobileScreen()){
+        window.addEventListener('load', open_broschuere);
+        window.addEventListener('hashchange', open_broschuere);
+    }
+
+    
   </script>
