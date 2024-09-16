@@ -102,7 +102,23 @@ const bubbles = [
             if (event.key === "Escape") getButton(myOverlay, "#close").click();
             if (event.key === "ArrowLeft") getButton(myOverlay, "#prev").click();
             if (event.key === "ArrowRight") getButton(myOverlay, "#next").click();
-            };
+        };
+        let touchStartX: number | undefined = undefined;
+        const handleSwipe = (end: number | undefined) => {
+            if (touchStartX === undefined || end === undefined)
+                return
+            const THRESHOLD = 50;
+            if (end - touchStartX > THRESHOLD)
+                getButton(myOverlay, "#prev").click();
+            if (end - touchStartX < -THRESHOLD)
+                getButton(myOverlay, "#next").click();
+            touchStartX = undefined;
+        };
+        const touchStartListener = (event: TouchEvent) => touchStartX = event.touches[0]?.screenX;
+        // probably broken for multitouch. please don't multitouch.
+        const touchEndListener = (event: TouchEvent) => handleSwipe(event.changedTouches[0]?.screenX);
+        const mouseDownListener = (event: MouseEvent) => touchStartX = event.screenX;
+        const mouseUpListener = (event: MouseEvent) => handleSwipe(event.screenX);
         imageDivs.forEach((div, index) => {
             div.addEventListener("click", () => {
                 const idxAttr = index ? div.getAttribute("data-idx") : "0";
@@ -112,12 +128,20 @@ const bubbles = [
                 // not using capture=once since the user may not ever press a key
                 // (i.e. close button instead of escape key)
                 document.addEventListener("keydown", keyListener);
+                document.addEventListener("touchstart", touchStartListener);
+                document.addEventListener("touchend", touchEndListener);
+                document.addEventListener("mousedown", mouseDownListener);
+                document.addEventListener("mouseup", mouseUpListener);
             })
         });
         getButton(myOverlay, "#close").addEventListener("click", () => {
             myOverlay.style.visibility = "hidden";
             myOverlay.style.opacity = "0";
             document.removeEventListener("keydown", keyListener);
+            document.removeEventListener("touchstart", touchStartListener);
+            document.removeEventListener("touchend", touchEndListener);
+            document.removeEventListener("mousedown", mouseDownListener);
+            document.removeEventListener("mouseup", mouseUpListener);
         });
         getButton(myOverlay, "#prev").addEventListener("click", () => {
             currentIndex = Math.max(0, currentIndex - 1);
