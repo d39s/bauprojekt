@@ -72,6 +72,13 @@ const cards = Array.from(refs.values());
     document.querySelectorAll("#gallery > .container > .reference-toggle").forEach(element =>
         element.addEventListener("click", () => {
             element.toggleAttribute("deselected");
+            // if this was the last active filter, reenable all others
+            if (!document.querySelector("#gallery > .container > .reference-toggle:not([deselected])"))
+                [...document.querySelectorAll<HTMLElement>(
+                    "#gallery > .container > .reference-toggle"
+                )].filter(
+                    other => other !== element
+                ).forEach(other => other.click());
             const purpose = element.getAttribute("data-purpose");
             if (!purpose) return;
             [...document.querySelectorAll("#gallery > .container")].filter(
