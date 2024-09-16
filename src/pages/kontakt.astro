@@ -10,7 +10,7 @@ const optimizedTeamBg = await getImage({src: team_bg, format: 'webp'});
     title="Kontaktieren Sie uns!" 
     description="Kontaktieren Sie uns für Ihr Bauprojekt! Wir freuen uns auf Ihre Anfrage und stehen Ihnen mit Rat und Tat zur Seite."
     >
-    <div class="card-section dark mask-bg">
+    <div class="card-section card-section-start dark mask-bg">
         <div class="container">
             <h1>
                 Ihr Kontakt<span>.</span>
@@ -37,7 +37,7 @@ const optimizedTeamBg = await getImage({src: team_bg, format: 'webp'});
                     </div>
                     <a class="btn" href="mailto:info@bauprojekt.design">
                         <button>
-                            bauprojekt.design 
+                            info@bauprojekt.design 
                         </button>
                     </a>
                     <p class="descr">
@@ -107,9 +107,7 @@ const optimizedTeamBg = await getImage({src: team_bg, format: 'webp'});
 </script>
 
 <style>
-    h1{
-        font-size: 72px;
-    }
+
     .contact-grid{
         display: grid;
         grid-template-columns: repeat(3, 1fr);
@@ -128,8 +126,9 @@ const optimizedTeamBg = await getImage({src: team_bg, format: 'webp'});
             "headline"
             "button"
             "descr";
-        grid-template-rows: 50px 30px 48px 90px;
+        grid-template-rows: 50px 1fr 48px 90px;
         gap: 15px;
+        text-align: center;
     }
     .contact-item > .icon{
         grid-area: icon;
@@ -156,6 +155,7 @@ const optimizedTeamBg = await getImage({src: team_bg, format: 'webp'});
         grid-area: descr;
         margin: 0;
         font-size: 16px;
+        line-height: 22px;
         text-align: center;
         align-self: center;
     }
@@ -236,14 +236,62 @@ const optimizedTeamBg = await getImage({src: team_bg, format: 'webp'});
         color: crimson;
     }
 
-    @media (min-width: 768px) AND (max-width: 1000px){
-
+    @media(max-width: 1000px){
+        h1{
+            text-align: center;
+        }
+        .contact-grid{
+            gap: 25px;
+            grid-template-columns: 1fr;
+        }
+        .contact-item{
+            grid-template-rows: 50px 1fr 48px auto;
+            width: 450px;
+            margin: 0 auto;
+            padding: 25px 15px 20px;
+        }
+        .contact-item > .headline{
+            font-size: 23px;
+        }
+        .contact-item > .btn > button{
+            max-width: 205px;
+            font-size: 15px;
+        }
+        #contact-form{
+            max-width: 600px;
+            padding: 25px 30px;
+        }
     }
 
     @media (max-width: 767px){
+        .contact-grid{
+            margin-bottom: 40px;
+        }
+        .contact-item{
+            width: 90%;
+            margin: 0 auto;
+        }
         .mask-bg{
             margin-bottom: -40px;
             mask-image: radial-gradient(ellipse 100% 25px at center bottom, transparent 50%, black 54%);
+        }
+        #contact-form{
+            width: 98%;
+            margin: 80px auto 50px;
+            padding: 25px 15px;
+        }
+        #contact-form h2{
+            margin-bottom: 5px;
+            font-size: 34px;
+            text-align: center;
+        }
+        input{
+            width: 100%;
+        }
+    }
+    @media (max-width: 500px){
+        form{
+            grid-template-columns: 1fr;
         }
     }
 </style>

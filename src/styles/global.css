@@ -18,7 +18,7 @@ html {
     --gray: #323237;
     --yellow: #FCBB40;
     --text-light: #eee;
-    --text-dark: var(var(--gray));
+    --text-dark: var(--gray);
     --stripeBg: var(--yellow);
     --stripeBottomBg: var(--gray);
     --bottomBg: var(--gray);
@@ -198,6 +198,10 @@ a:hover{
 .card-section {
     position: relative;
     padding: 45px 0 55px;
+}
+
+.card-section.card-section-start{
+    padding-top: 60px;
 }
 
 .card-section::before {

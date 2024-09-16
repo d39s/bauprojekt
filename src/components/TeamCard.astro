@@ -3,25 +3,40 @@ import type {ImageMetadata} from 'astro';
 import {Image} from 'astro:assets';
 
 interface Props {
+    link: string;
     imagePath: string;
     name: string;
     position: string;
 }
 
-const {imagePath, name, position} = Astro.props;
+const {link, imagePath, name, position} = Astro.props;
 const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/**/*.{jpeg,jpg,png,gif}')
 if (!images[imagePath]) throw new Error(`"${imagePath}" does not exist in glob: "src/assets/**/*.{jpeg,jpg,png,gif}"`);
 ---
-<div id="container">
-    <div id="image-container">
-        <!--TODO type guard instead of asserting-->
-        <Image class="round-img" src={images[imagePath]!()} alt={name}/>
+
+<!--TODO type guard instead of asserting for Image -->
+{link && link.trim() !== '' ? (
+    <a id="container" href={link}>
+        <div id="image-container">
+            <Image class="round-img" src={images[imagePath]!()} alt={name}/>
+        </div>
+        <div id="text">
+            <span style="font-weight: bold;">{name}</span>
+            <span>{position}</span>
+        </div>
+    </a>
+) : (
+    <div id="container">
+        <div id="image-container">
+
+            <Image class="round-img" src={images[imagePath]!()} alt={name}/>
+        </div>
+        <div id="text">
+            <span style="font-weight: bold;">{name}</span>
+            <span>{position}</span>
+        </div>
     </div>
-    <div id="text">
-        <span style="font-weight: bold;">{name}</span>
-        <span>{position}</span>
-    </div>
-</div>
+)}
 
 <style define:vars={{imagePath}}>
     #container {
@@ -83,3 +98,15 @@ if (!images[imagePath]) throw new Error(`"${imagePath}" does not exist in glob: 
         }
     }
 </style>
+
+<script>
+    document.addEventListener('click', (event) => {
+      const target = event.target as HTMLElement;
+      const dataLink = target.getAttribute('data-link');
+      
+      if (dataLink && dataLink.trim() !== '') {
+        event.preventDefault();
+        window.location.href = dataLink;
+      }
+    });
+  </script>
