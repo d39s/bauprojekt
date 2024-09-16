@@ -7,7 +7,7 @@ import broschuere from '../../assets/broschuere_dark.png';
 const images = await Astro.glob('/src/assets/flipbook/*.{png,jpg,jpeg}');
 
 images.sort((a, b) => {
-  const getNumber = (src) => {
+  const getNumber = (src:any) => {
     const match = src.match(/(\d+)/);
     return match ? parseInt(match[1], 10) : 0;
   };
@@ -245,11 +245,11 @@ import { Image } from 'astro:assets';
     }
 
 
-    const flipBook = (elBook) => {
+    const flipBook = (elBook:any) => {
         elBook.style.setProperty("--c", 0); // Set current page
-        elBook.querySelectorAll(".page").forEach((page, idx) => {
+        elBook.querySelectorAll(".page").forEach((page:any, idx:any) => {
             page.style.setProperty("--i", idx);
-            page.addEventListener("click", (evt) => {
+            page.addEventListener("click", (evt:any) => {
             if (evt.target.closest("a")) return;
             const curr = evt.target.closest(".back") ? idx : idx + 1;
             elBook.style.setProperty("--c", curr);
