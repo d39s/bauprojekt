@@ -1,5 +1,6 @@
-buildDocker(
-    rclone: [[
+modularPipeline([
+    nextcloudRcloneStage(
+        name: 'referenzen',
         url: 'nextcloud-url',
         username: 'nextcloud-username',
         password: 'nextcloud-password',
@@ -9,6 +10,11 @@ buildDocker(
             '--include',
             '/{{referenz-\\d+/[^/]+\\.(json|jpg|png)}}'
         ]
-    ]],
-    compressed_caching: false
-)
+    ),
+    dockerStage(
+        unstash: [
+            'referenzen',
+        ],
+        compressed_caching: false,
+    ),
+])
