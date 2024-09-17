@@ -22,7 +22,7 @@ const {title, description} = Astro.props;
     <meta name="description" content={description}/>
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" defer></script>
     <script>
-        window.enableSubmitButton = () => document.querySelector("button[type='submit']")?.removeAttribute("disabled");
+        window.enableSubmitButton = () => document.querySelector("button[type='submit'][disabled]")?.removeAttribute("disabled");
     </script>
 </head>
 <body>
