@@ -391,11 +391,18 @@ import CollapsibleCard from "../components/CollapsibleCard.astro";
                         </div>
                     </div>
                     <!-- /DragDropField -->
-                    <div class="cf-turnstile" data-sitekey="0x4AAAAAAAkFg8Vn2oQl2O3s" data-size="flexible" data-language="de" data-theme="light"></div>
+                    <div
+                        class="cf-turnstile"
+                        data-sitekey="0x4AAAAAAAkFg8Vn2oQl2O3s"
+                        data-size="flexible"
+                        data-language="de"
+                        data-theme="light"
+                        data-callback="enableSubmitButton"
+                    ></div>
 
                     <span hidden class="wide success">Vielen Dank für Ihre Nachricht.</span>
                     <span hidden class="wide error">Ein Fehler ist aufgetreten. Bitte versuchen Sie es später erneut.</span>
-                    <button type="submit" class="wide">Senden</button>
+                    <button type="submit" disabled class="wide">Senden</button>
                 </form>
             </div>
         </div>
@@ -532,6 +539,10 @@ import CollapsibleCard from "../components/CollapsibleCard.astro";
         cursor: pointer;
         font-weight: bold;
         font-size: large;
+    }
+
+    button[type="submit"][disabled] {
+        cursor: not-allowed;
     }
 
     .success {
