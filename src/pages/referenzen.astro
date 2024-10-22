@@ -3,29 +3,50 @@ import Layout from '../layouts/no_teaser.astro';
 import ImageGrid from "../components/ImageGrid.astro";
 import {Icon} from 'astro-icon/components';
 import { getImage } from 'astro:assets';
+import type { GetImageResult } from 'astro';
+
+interface CardData {
+  data: {
+    location: string;
+    purpose: string;
+    time: string;
+    area: string;
+    // additional "default" key with type GetImageMetadata, whatever
+  };
+  titleImages: number[];
+  allImages: Promise<GetImageResult>[];
+};
 
 const allFiles = import.meta.glob<{default: ImageMetadata}>("../assets/referenzen/*/*.{json,png,jpg}");
-const refs = new Map<string, any>;
+const refs = new Map<string, CardData>();
 for (const [path, getter] of Object.entries(allFiles)) {
     const refMatch = /^.*\/(.*?)\/[^/]*$/.exec(path);
     if (!refMatch || !refMatch[1]) throw new Error("error extracting reference name")
     const refName = refMatch[1];
     if (!refs.has(refName))
         refs.set(refName, {
-            data: undefined,
+            data: {location: "", purpose: "", time: "", area: ""},
             titleImages: [],
             allImages: [],
         })
-    const inst = refs.get(refName);
+    const inst = refs.get(refName)!; // set above
     if (path.endsWith(".json"))
-        inst.data = await getter()
+        // @ts-expect-error astro's dynamic async fuckery is too much for me to handle right now
+        inst.data = await getter() as CardData["data"];
     else {
         inst.allImages.push(getImage({src: getter(), format: "webp"}));
         if (/titel.[a-zA-Z]+$/.exec(path))
             inst.titleImages.push(inst.allImages.length - 1)
     }
 }
-const cards = Array.from(refs.values());
+const cards = Array.from(refs.values()).sort((a: CardData, b: CardData) => {
+    const wohnung = "Wohnung";
+    if(a.data.purpose === wohnung && b.data.purpose === wohnung) return 0;
+    if(a.data.purpose === wohnung) return 1;
+    if(b.data.purpose === wohnung) return -1;
+    return 0;
+});
+console.log(cards[0])
 ---
 
 <Layout
