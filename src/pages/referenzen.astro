@@ -60,7 +60,8 @@ console.log(cards[0])
                 <Icon name="mdi:hashtag"/>
                 Büro
             </span>
-            <span class="reference-toggle deselected" data-purpose="Wohnung">
+            <!--@ts-expect-error custom attribute-->
+            <span class="reference-toggle" deselected data-purpose="Wohnung">
                 <Icon name="mdi:hashtag"/>
                 Wohnung
             </span>
@@ -78,7 +79,7 @@ console.log(cards[0])
             </span>
         </div>
         {cards.map(data =>
-                <div class="container" data-purpose={data.data.purpose} data-area={data.data.area} data-time={data.data.time}>
+                <div class="container" data-purpose={data.data.purpose} data-area={data.data.area} data-time={data.data.time} hidden={data.data.purpose === "Wohnung"}>
                     <ImageGrid
                             titleImages={data.titleImages}
                             allImages={data.allImages}
