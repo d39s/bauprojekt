@@ -145,14 +145,25 @@ const cards = Array.from(refs.values());
 
     function buildSorter(fun: (node: Element) => number, direction: boolean) {
         return (a: Element, b: Element) => {
-            const areaA = fun(a);
-            const areaB = fun(b);
-            // unsortables go at the bottom
-            if(isNaN(areaA) && isNaN(areaB)) return 0;
-            if(isNaN(areaA)) return 1;
-            if(isNaN(areaB)) return -1;
-            if(areaA === areaB) return 0;
-            if(areaA > areaB === direction) return 1;
+            const valueA = fun(a);
+            const valueB = fun(b);
+            const purposeA = a.getAttribute("data-purpose");
+            const purposeB = b.getAttribute("data-purpose");
+            // unsortables go to the bottom
+            if(isNaN(valueA) && isNaN(valueB)) return 0;
+            if(isNaN(valueA)) return 1;
+            if(isNaN(valueB)) return -1;
+            // no purpose to the bottom
+            if(purposeA === null && purposeB === null) return 0;
+            if(purposeA === null) return 1;
+            if(purposeB === null) return -1;
+            // "Wohnung" last
+            const wohnung = "Wohnung";
+            if(purposeA === wohnung && purposeB === "Wohnung") return 0;
+            if(purposeA === wohnung) return 1;
+            if(purposeB === wohnung) return -1;
+            if(valueA === valueB) return 0;
+            if(valueA > valueB === direction) return 1;
             return -1;
         };
     }
