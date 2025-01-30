@@ -1,10 +1,9 @@
 ---
 import Layout from '../layouts/with_teaser.astro';
-import angebot1 from '../assets/icons_aufgaben/1_bauplan.png';
-import angebot2 from '../assets/icons_aufgaben/2_ortsbesichtigung.png';
-import angebot3 from '../assets/icons_aufgaben/3_kostenschaetzung.png';
-import angebot4 from '../assets/icons_aufgaben/4_beratung.png';
-import angebot5 from '../assets/icons_aufgaben/5_angebot.png';
+import angebot1 from '../assets/icons_aufgaben/beratung.svg';
+import angebot2 from '../assets/icons_aufgaben/unterlagen.svg';
+import angebot3 from '../assets/icons_aufgaben/ortsbesichtigung.svg';
+import angebot4 from '../assets/icons_aufgaben/angebot.svg';
 import { Image } from 'astro:assets';
 ---
 
@@ -21,56 +20,45 @@ import { Image } from 'astro:assets';
 
                 <!-- 1. -->
                 <div class="list-item">
-                    <Image src={angebot1} alt="Schritt 1 - Bauplan" width="115"></Image>
+                    <Image src={angebot1} alt="Schritt 1 - Beratung" width="115"></Image>
                     <div class="headline">
-                        Ihre Baupläne<span>.</span>
+                        Beratung<span>.</span>
                     </div>
                     <div class="descr">
-                        Sie übermitteln uns die Baupläne zur Einsicht.
+                        Im ersten Termin werden die Rahmenbedingungen, Wünsche, Anforderungen sowie eine grobe Timeline besprochen.
                     </div>
                 </div>
 
                 <!-- 2. -->
                 <div class="list-item">
-                    <Image src={angebot2} alt="Schritt 2 - Ortsbesichtigung" width="115"></Image>
+                    <Image src={angebot2} alt="Schritt 2 - Ihre Unterlagen" width="115"></Image>
                     <div class="headline">
-                        Ortsbesichtigung<span>.</span>
+                        Ihre Unterlagen<span>.</span>
                     </div>
                     <div class="descr">
-                        Wir kommen vorbei und schauen uns zusammen das Objekt an.
+                        Wir werten die von Ihnen zur Verfügung gestellten Unterlagen aus. Pläne/Baubeschreibung/Raumbuch etc.
                     </div>
                 </div>
 
                 <!-- 3. -->
                 <div class="list-item">
-                    <Image src={angebot3} alt="Schritt 3 - Kostenschätzung" width="115"></Image>
+                    <Image src={angebot3} alt="Schritt 3 - Ortsbesichtigung" width="115"></Image>
                     <div class="headline">
-                        Kostenschätzung<span>.</span>
+                        Ortsbesichtigung<span>.</span>
                     </div>
                     <div class="descr">
-                        Sie erhalten von uns eine umfassende Einschätzung der Projektkosten.
+                        Durch unser Team erfolgt eine Bestandsaufnahme der Mietfläche inkl. aller technischen Anlagen in Bezug auf die Vorstellung des geplanten Ausbaus.
                     </div>
                 </div>
 
                 <!-- 4. -->
                 <div class="list-item">
-                    <Image src={angebot4} alt="Schritt 4 - Beratung" width="115"></Image>
-                    <div class="headline">
-                        Beratung<span>.</span>
-                    </div>
-                    <div class="descr">
-                        Beratung von Anfang an bezüglich Ihren Wünschen, des Ausbaus und der Umsetzbarkeit sowie zu sonstigen Rahmenbedingungen.
-                    </div>
-                </div>
-
-                <!-- 5. -->
-                <div class="list-item">
-                    <Image src={angebot5} alt="Schritt 5 - Angebot" width="115"></Image>
+                    <Image src={angebot4} alt="Schritt 4 - Angebot" width="115"></Image>
                     <div class="headline">
                         Ihr Angebot<span>.</span>
                     </div>
                     <div class="descr">
-                        Nach 5 bis 7 Werktagen erhalten Sie Ihr professionelles und unverbindliches Angebot.
+                        Sie erhalten unser Angebot innerhalb von 7 WT inkl. einer Mieterausbaubeschreibung, wenn sie das wünschen. Die geplanten Ausbauleistungen können wir Ihnen auf Wunsch auch gerne zum Pauschalfestpreis anbieten.
                     </div>
                 </div>
 
