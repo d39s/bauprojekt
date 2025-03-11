@@ -15,6 +15,7 @@ interface CardData {
   };
   titleImages: number[];
   allImages: Promise<GetImageResult>[];
+  index: number;
 };
 
 const allFiles = import.meta.glob<{default: ImageMetadata}>("../assets/referenzen/*/*.{json,png,jpg}");
@@ -23,11 +24,15 @@ for (const [path, getter] of Object.entries(allFiles)) {
     const refMatch = /^.*\/(.*?)\/[^/]*$/.exec(path);
     if (!refMatch || !refMatch[1]) throw new Error("error extracting reference name")
     const refName = refMatch[1];
+    const refIndexMatch = /\d+/.exec(refName);
+    if (!refIndexMatch || refIndexMatch.length !== 1) throw Error("invalid reference name");
+    const refIndex = Number.parseInt(refIndexMatch[0])
     if (!refs.has(refName))
         refs.set(refName, {
             data: {location: "", purpose: "", time: "", area: ""},
             titleImages: [],
             allImages: [],
+            index: refIndex,
         })
     const inst = refs.get(refName)!; // set above
     if (path.endsWith(".json"))
@@ -41,10 +46,9 @@ for (const [path, getter] of Object.entries(allFiles)) {
 }
 const cards = Array.from(refs.values()).sort((a: CardData, b: CardData) => {
     const wohnung = "Wohnung";
-    if(a.data.purpose === wohnung && b.data.purpose === wohnung) return 0;
-    if(a.data.purpose === wohnung) return 1;
-    if(b.data.purpose === wohnung) return -1;
-    return 0;
+    if(a.data.purpose === wohnung && b.data.purpose !== wohnung) return 1;
+    if(b.data.purpose === wohnung && a.data.purpose !== wohnung) return -1;
+    return b.index - a.index; // reverse
 });
 ---
 
@@ -78,7 +82,7 @@ const cards = Array.from(refs.values()).sort((a: CardData, b: CardData) => {
             </span>
         </div>
         {cards.map(data =>
-                <div class="container" data-purpose={data.data.purpose} data-area={data.data.area} data-time={data.data.time} hidden={data.data.purpose === "Wohnung"}>
+                <div class="container" data-purpose={data.data.purpose} data-area={data.data.area} data-time={data.data.time} data-index={data.index} hidden={data.data.purpose === "Wohnung"}>
                     <ImageGrid
                             titleImages={data.titleImages}
                             allImages={data.allImages}
