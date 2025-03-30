@@ -22,10 +22,10 @@ const allFiles = import.meta.glob<{default: ImageMetadata}>("../assets/referenze
 const refs = new Map<string, CardData>();
 for (const [path, getter] of Object.entries(allFiles)) {
     const refMatch = /^.*\/(.*?)\/[^/]*$/.exec(path);
-    if (!refMatch || !refMatch[1]) throw new Error("error extracting reference name")
+    if (!refMatch || !refMatch[1]) throw new Error("\nerror extracting reference name")
     const refName = refMatch[1];
     const refIndexMatch = /\d+/.exec(refName);
-    if (!refIndexMatch || refIndexMatch.length !== 1) throw Error("invalid reference name");
+    if (!refIndexMatch || refIndexMatch.length !== 1) throw Error("\ninvalid reference name");
     const refIndex = Number.parseInt(refIndexMatch[0])
     if (!refs.has(refName))
         refs.set(refName, {
@@ -52,9 +52,9 @@ const cards = Array.from(refs.values()).sort((a: CardData, b: CardData) => {
 });
 for (const card of cards) {
     if (!card.allImages.length)
-        throw Error(`referece ${card.index} has 0 images`);
+        throw Error(`\nreferece ${card.index} has 0 images`);
     if (!card.titleImages.length)
-        throw Error(`referece ${card.index} has 0 title images`);
+        throw Error(`\nreferece ${card.index} has 0 title images`);
 }
 ---
 
