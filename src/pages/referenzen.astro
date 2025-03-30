@@ -40,7 +40,7 @@ for (const [path, getter] of Object.entries(allFiles)) {
         inst.data = await getter() as CardData["data"];
     else {
         inst.allImages.push(getImage({src: getter(), format: "webp"}));
-        if (/titel.[a-zA-Z]+$/.exec(path))
+        if (/titel/.exec(path))
             inst.titleImages.push(inst.allImages.length - 1)
     }
 }
