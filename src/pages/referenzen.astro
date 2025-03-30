@@ -50,6 +50,12 @@ const cards = Array.from(refs.values()).sort((a: CardData, b: CardData) => {
     if(b.data.purpose === wohnung && a.data.purpose !== wohnung) return -1;
     return b.index - a.index; // reverse
 });
+for (const card of cards) {
+    if (!card.allImages.length)
+        throw Error(`referece ${card.index} has 0 images`);
+    if (!card.titleImages.length)
+        throw Error(`referece ${card.index} has 0 title images`);
+}
 ---
 
 <Layout
