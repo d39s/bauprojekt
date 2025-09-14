@@ -42,5 +42,5 @@ pipeline {
                 kaniko
             }
         }
-    }   
+    }
 }
