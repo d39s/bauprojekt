@@ -39,7 +39,7 @@ pipeline {
             }
             steps {
                 unstash 'referenzen'
-                kaniko
+                kaniko()
             }
         }
     }
