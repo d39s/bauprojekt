@@ -1,5 +1,3 @@
-@Library('d39s-jenkins-library@remove-eval') _
-
 pipeline {
     agent none
     options {
