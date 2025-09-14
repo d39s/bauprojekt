@@ -19,8 +19,8 @@ pipeline {
             }
             environment {
                 NC_URL = credentials('nextcloud-url')
-                NC_USERNAME = credentials('nextcloud-user')
-                NC_PASSWORD = credentials('nextcloud-pass')
+                NC_USERNAME = credentials('nextcloud-username')
+                NC_PASSWORD = credentials('nextcloud-password')
             }
             steps {
                 downloadNextcloud from: '/Anpassung Referenzen/', to: 'src/assets/referenzen/', extraArgs: [
