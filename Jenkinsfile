@@ -25,7 +25,7 @@ pipeline {
             steps {
                 downloadNextcloud from: '/Anpassung Referenzen/', to: 'src/assets/referenzen/', extraArgs: [
                     '--include',
-                    '/{{referenz-\d+/[^/]+\.(json|jpg|png)}}'
+                    '/{{referenz-\\d+/[^/]+\\.(json|jpg|png)}}'
                 ]
                 stash includes: '**', name: 'referenzen'
             }
