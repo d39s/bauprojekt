@@ -1,15 +1,15 @@
 ---
 /* 4:5 */
 import broschuere from '../../assets/broschuere_dark.png';
-
+import { Image } from 'astro:assets';
 
 // Importierealle Bilder aus flipbook
-const images = await Astro.glob('/src/assets/flipbook/*.{png,jpg,jpeg}');
+const images = Object.values(import.meta.glob<{ default: ImageMetadata }>('/src/assets/flipbook/*.{png,jpg,jpeg}', { eager: true }));
 
 images.sort((a, b) => {
-  const getNumber = (src:any) => {
+  const getNumber = (src: string) => {
     const match = src.match(/(\d+)/);
-    return match ? parseInt(match[1], 10) : 0;
+    return match?.[1] ? parseInt(match[1], 10) : 0;
   };
 
   const numA = getNumber(a.default.src);
@@ -17,8 +17,6 @@ images.sort((a, b) => {
 
   return numA - numB;
 });
-
-import { Image } from 'astro:assets';
 ---
 
 <div class="container" style="position: relative;">
@@ -60,7 +58,7 @@ import { Image } from 'astro:assets';
                                 <div class="back">
                                     <Image 
                                         class="round-img" 
-                                        src={images[index + 1]?.default} 
+                                        src={images[index + 1]!.default}
                                         alt={`Broschüre Seite ${index + 2}`}
                                     />
                                 </div>
